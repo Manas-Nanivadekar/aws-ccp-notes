@@ -1,0 +1,645 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ELB &amp; ASG</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2198a1c3-5cb4-4b58-b726-d24546da3db5" class="page mono"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_henri_rousseau_1907.jpg" style="object-position:center 30.000000000000004%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⚖️</span></div><h1 class="page-title">ELB &amp; ASG</h1></header><div class="page-body"><h1 id="eb91b8ce-4dc3-4b38-9cfb-bb82150164b8" class="">Scalability and High Availability</h1><ul id="4728bf6a-8e08-478b-aec0-70851d628c52" class="bulleted-list"><li>Scalability means that an application/ system can handle greater loads by adapting.</li></ul><ul id="c70523ce-074d-431e-aa9e-7dfceefe0316" class="bulleted-list"><li>There are two kinds of scalability:<ul id="17021b5f-a577-4298-80f6-53ef89190204" class="bulleted-list"><li>Vertical Scalability</li></ul><ul id="71156681-5387-495c-841f-5a4233a0417b" class="bulleted-list"><li>Horizontal Scalability</li></ul></li></ul><ul id="b4283ef3-73bc-4885-8666-d7ab34a48fa2" class="bulleted-list"><li>Scalability is linked but diff from High Availability</li></ul><h2 id="0d34ae3b-6594-4331-b5fd-b37788268ef2" class="">Vertical Scalability</h2><ul id="0029878a-e29d-4a81-85c1-809f984ac3ad" class="bulleted-list"><li>Vertical Scalability means increasing the size of the instance</li></ul><ul id="9420cb84-b1ea-4e12-b0cc-d1dc2461ba60" class="bulleted-list"><li>For example, your application runs on a t2.micro</li></ul><ul id="dcfdb0be-3071-43c9-b57a-8097260f8377" class="bulleted-list"><li>Scaling that application vertically means running it on a t2.large</li></ul><ul id="4b368603-0dc1-4667-bd2a-ecd972976bf2" class="bulleted-list"><li>Vertical scalability is very common for non distributed systems, such as a database</li></ul><ul id="2c7a9965-7e3c-461b-9c1d-9c1b8dbd97fa" class="bulleted-list"><li>There&#x27;s usually a limit to how much you can vertically scale(hardware limit)</li></ul><h2 id="2b64ea58-33db-4f38-896d-15a2ae8af1d8" class="">Horizontal Scalability </h2><ul id="5543900d-f48f-4906-9a1d-3f194ba5abee" class="bulleted-list"><li>Horizontal Scalability means increasing the number of instances/systems for your application</li></ul><ul id="5c429da1-c9ee-4860-847a-5f961a269080" class="bulleted-list"><li>Horizontal scaling implies distributed systems.</li></ul><ul id="c37a4e28-b9cb-4516-bcbf-2907b9585cf7" class="bulleted-list"><li>This is very common for web applications/modern applications</li></ul><ul id="f96cb23c-7407-4547-a762-cc8a57f97e2e" class="bulleted-list"><li>It&#x27;s easy to scale horizontally.</li></ul><h2 id="d72db945-3ad5-4e66-bc9b-f87dc714bfa8" class="">High Availability</h2><ul id="e268b6ab-feed-4606-8512-e268ecc6dd4b" class="bulleted-list"><li>High Availability usually goes hand in hand with horizontal scaling</li></ul><ul id="9631ba09-5fbc-4856-bf56-7c76cf8593ab" class="bulleted-list"><li>High availability means running your application/system in at least 2 Availability Zones</li></ul><ul id="bf788a48-577d-4a76-b3f3-5230e5330cb0" class="bulleted-list"><li>The goal of high availability is to survive a data centre loss</li></ul><h2 id="28916b26-cd39-4eff-860d-d35ef770416e" class="">High Availability &amp; Scalability For EC2</h2><ul id="8238b3a4-3187-4963-aca7-31deedaac57f" class="bulleted-list"><li>Vertical Scaling: Increase instance size(=scale up/down)<ul id="b2dc6808-505e-4c40-9b23-7edf3e401c7a" class="bulleted-list"><li>From: t2.nano - 0.5G of RAM, I vCPU</li></ul><ul id="50a567f4-7703-4d8b-91ac-109c5163f43c" class="bulleted-list"><li>To: u-12tb1.metal - 12.3TB of RAM, 448 vCPUs</li></ul></li></ul><ul id="38e5a398-4500-4068-8c44-e1c96f114d0a" class="bulleted-list"><li>Horizontal Scaling: Increase the number of instances(= scale out/in)<ul id="f16fc74b-12b7-4ca3-b769-04c8bfb1cc8f" class="bulleted-list"><li>Auto Scaling Group</li></ul><ul id="5cd3dc48-e3d4-4a86-a832-1df801dd451f" class="bulleted-list"><li>Load Balancer</li></ul></li></ul><ul id="fd6642fe-33e0-4eb0-a016-04048b0106d9" class="bulleted-list"><li>High Availability: Run instances for the same application across multi AZ<ul id="463a2973-611f-49a2-ae65-d91041cf483d" class="bulleted-list"><li>Auto Scaling Group for multi AZ</li></ul></li></ul><h2 id="fbc42586-2cd2-4701-8a68-fdd5e4ee90b5" class="">Scalability vs Elasticity(vs Agility)</h2><ul id="66479f91-23fb-4fd2-9217-5bf328f3d4fb" class="bulleted-list"><li><strong>Scalability</strong>: ability to accommodate a large load by making the hardware stronger (scale up), or by adding nodes(scale out)</li></ul><ul id="044c1cbd-9278-40ea-ad12-7ed3e3ae41c9" class="bulleted-list"><li><strong>Elasticity</strong>: Once a system is scalable, elasticity means that there will be some &quot;auto-scaling&quot; so that the system can scale based on the load. This is &quot;cloud-friendly&quot;: pay-per-use, match demand, optimise cost</li></ul><ul id="fd933f05-a8f8-4929-aae4-b1886a37e528" class="bulleted-list"><li><strong>Agility</strong>:(not related to scalability- ditractor) new IT resources are only a click away, which means that you reduce the time to make those resources available to your developers from weeks to just mins.</li></ul><p id="e8acd643-d36c-4987-95e0-f784ab38f4a1" class="">
+</p><p id="9840ed8e-a5c3-451d-afe0-567435be07d2" class="">
+</p><p id="6e1eebd8-d3b5-4278-89c3-7611098b9506" class="">
+</p><h1 id="4e7f0b47-fc53-4817-b9e7-7c0fc420ec02" class="">Elastic Load Balancer (ECB)</h1><h2 id="653687d5-93d4-4444-b598-85eb819a611b" class="">What is ELB?</h2><ul id="8fcfe912-ed9f-4242-9674-695450071ffa" class="bulleted-list"><li>Load balancers are servers that forward internet traffic to multiple servers(EC2 Instances) downstream</li></ul><figure id="268b229c-c507-429b-8230-0d6068324c97" class="image"><a href="ELB%20&amp;%20ASG%202198a1c35cb44b58b726d24546da3db5/Untitled.png"><img style="width:930px" src="ELB%20&amp;%20ASG%202198a1c35cb44b58b726d24546da3db5/Untitled.png"/></a></figure><h2 id="8dc0968f-da02-4288-9a17-50478f3daea9" class="">Why use a load balancer?</h2><ul id="39b9fc67-b8cc-4e3b-a81f-bb697c83b7ec" class="bulleted-list"><li>Spread load across multiple downstream instances</li></ul><ul id="03f0a4df-0cb7-4b34-a3b5-56f124d1b71e" class="bulleted-list"><li>Expose a single point of access (DNS) to your application</li></ul><ul id="a7d85c00-4f71-4499-972b-a89d1e359391" class="bulleted-list"><li>Seamless handle failure of downstream instances</li></ul><ul id="1db93154-5dd5-40e4-ac1f-bedb94464374" class="bulleted-list"><li>Do regular health checks to your instances</li></ul><ul id="20720274-2e4a-45b5-a55c-fde29f9f2cf2" class="bulleted-list"><li>Provide SSL termination (HTTPS) for your websites</li></ul><ul id="4e976ab2-469e-46c2-9178-f40f2e950698" class="bulleted-list"><li>High availability across zones</li></ul><h2 id="d229118a-ffc2-4151-97e7-cc8346d7f0df" class="">Why use an Elastic Load Balance?</h2><ul id="7ec8a065-1120-40e5-8462-8b43a7b95453" class="bulleted-list"><li>An ELB is a <strong>manged load balancer</strong><ul id="d45eecc1-7917-4063-8b42-83e42f870b0f" class="bulleted-list"><li>AWS guarantees that it will be working</li></ul><ul id="d2495ecf-20ac-480f-b0fd-fe0188dbad69" class="bulleted-list"><li>AWS takes care of upgrades, maintenance, high availability</li></ul><ul id="a80210f1-233a-4385-94ff-d6dfff18a3f2" class="bulleted-list"><li>AWS provides only a few config knobs</li></ul></li></ul><ul id="8a1ec0c0-cee7-4d40-9748-d73e49bf051a" class="bulleted-list"><li>It costs less to setup your own load balancer but it will be a lot more effort on your end(maintenance, integration)</li></ul><ul id="a5212858-05a3-49d6-ba1b-1fb43cc11924" class="bulleted-list"><li>3 kinds of load balancers offered by AWS:<ul id="63783f55-4d33-42bf-8a2e-22f53e48465a" class="bulleted-list"><li>Application Load Balancer(HTTP/HTTPS only) - Layer 7</li></ul><ul id="16e62709-de3b-4df3-b3df-59258ae4dce8" class="bulleted-list"><li>Network Load Balancer(ultra-high performance allows for TCP) - Layer 4</li></ul><ul id="be96857d-5f0d-4cff-a3ab-9a07b05686d3" class="bulleted-list"><li>Classic Load Balancer (Slowly retiring) - Layer 4 &amp; 7</li></ul></li></ul><p id="5d2bf3aa-5aa4-470d-b5a2-4ed42a50067e" class="">
+</p><p id="daa4fa09-b4f6-4c9d-8f75-76f3c0191ef5" class="">
+</p><p id="6fbfdbcf-61e6-47af-ab1a-a7e658cf84c4" class="">
+</p><h1 id="c23815fa-7f5d-4d2c-870d-0f54de7520da" class="">Auto Scaling Group</h1><h2 id="d300564e-1530-49ce-b7a2-d31cfb28ee55" class="">What&#x27;s an Auto Scaling Group?</h2><ul id="bd2cb4d5-34a1-475c-a5f8-7bc63d005b68" class="bulleted-list"><li>In real-life, the load on your websites and application can change</li></ul><ul id="607f036a-4b3b-4c74-846c-5f375505fddc" class="bulleted-list"><li>In the cloud, you can create and get rid of servers very quickly</li></ul><ul id="2f0b7059-0e69-4cdd-8949-462d20bfbbaf" class="bulleted-list"><li>The goal of an Auto Scaling Group (ASG) is to:<ul id="ffc61149-86aa-45af-a0b6-c96b11824df1" class="bulleted-list"><li>Scale out to match an increased load</li></ul><ul id="fe929a5e-c920-4b02-b14c-3b8e64e69358" class="bulleted-list"><li>Scale in to match a decreased load</li></ul><ul id="a50b4625-5e3d-4e28-8d34-95bd890c6c64" class="bulleted-list"><li>Ensure we have minimum and a maximum number of machines running</li></ul><ul id="06e52c16-2250-4dfe-9b1d-deb8d67204e1" class="bulleted-list"><li>Automatically register new instances to a load balancer</li></ul><ul id="398dd49c-cd12-4e7b-bad9-e32cdb8bcc62" class="bulleted-list"><li>Replace unhealthy instances</li></ul></li></ul><ul id="b5021788-aca1-47f0-a5ab-fdda46fc2850" class="bulleted-list"><li>Cost saving</li></ul><h2 id="8401814e-8439-4a37-8cf0-da916b4f53fe" class="">Auto Scaling Group in AWS</h2><figure id="9f7b3724-2d94-4e36-8ee5-3da2cda5bc1a" class="image"><a href="ELB%20&amp;%20ASG%202198a1c35cb44b58b726d24546da3db5/Untitled%201.png"><img style="width:1163px" src="ELB%20&amp;%20ASG%202198a1c35cb44b58b726d24546da3db5/Untitled%201.png"/></a></figure><h2 id="b3787a62-a064-497f-bc0e-36f6ef94aec3" class="">ASG in AWS with Load Balancer</h2><figure id="011c7b97-e53a-47c6-883c-e58e6dee72fd" class="image"><a href="ELB%20&amp;%20ASG%202198a1c35cb44b58b726d24546da3db5/Untitled%202.png"><img style="width:1203px" src="ELB%20&amp;%20ASG%202198a1c35cb44b58b726d24546da3db5/Untitled%202.png"/></a></figure><p id="fdbf98a9-916a-4cba-a7ef-43a7bc19b50a" class="">
+</p><p id="bb3e2adf-c7be-4af4-8c75-9e78d197f971" class="">
+</p><p id="f5731031-7cc6-48c5-a506-919f083ed5d4" class="">
+</p><h1 id="421809da-dbb7-403a-9168-1467bcfd7f06" class="">Scaling Strategies</h1><ul id="b582e61c-6caa-4ce0-8ca8-32294e2caea7" class="bulleted-list"><li><strong>Manual Scaling</strong>: Update the size of an ASG manually</li></ul><ul id="d93c041b-bac5-49b3-8d06-90d8afb324d7" class="bulleted-list"><li><strong>Dynamic Scaling</strong>: Respond to changing demand<ul id="58378ec0-b67d-4a1c-9d17-1107dd4c8688" class="bulleted-list"><li><strong>Simple/Step Scaling</strong>:<ul id="2efbfd36-7276-4658-b95a-34f4d36561e1" class="bulleted-list"><li>When a CloudWatch alarm is triggered(ex CPU &gt; 70%), then add 2 units</li></ul><ul id="087251a9-006e-4751-8811-60f1b1fc0c87" class="bulleted-list"><li>When a CloudWatch alarm is triggered(ex CPU &lt; 30%), then remove 1 unit</li></ul></li></ul><ul id="ee36dc20-f9db-45f0-96bb-167455f8d369" class="bulleted-list"><li><strong>Target Tracking Scaling</strong>:<ul id="e16ace66-a3f9-4858-acfe-e5d169b27f96" class="bulleted-list"><li>Ex: I want the average ASG CPU to stay around 40%</li></ul></li></ul><ul id="99cf8f34-d074-406b-a747-33a11b654707" class="bulleted-list"><li><strong>Scheduled Scaling</strong><ul id="0e6fabc1-a1e5-451d-bfb4-030b0cd519f7" class="bulleted-list"><li>Anticipate a scaling on known usage patterns</li></ul></li></ul></li></ul><ul id="42c9c23e-a887-41ed-ae4a-ca9579f01717" class="bulleted-list"><li><strong>Predictive Scaling</strong><ul id="1789d2dd-e699-4213-a9aa-ed37d64c1854" class="bulleted-list"><li>Uses ML to predict future traffic ahead of time</li></ul><ul id="3885a415-7abb-45d8-8726-5428d5829535" class="bulleted-list"><li>Automatically provisions the right number of EC2 instances in advance</li></ul></li></ul></div></article></body></html>

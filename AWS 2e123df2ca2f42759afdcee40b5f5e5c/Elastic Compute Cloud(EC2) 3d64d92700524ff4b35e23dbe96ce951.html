@@ -1,0 +1,667 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Elastic Compute Cloud(EC2)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3d64d927-0052-4ff4-b35e-23dbe96ce951" class="page mono"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📢</span></div><h1 class="page-title">Elastic Compute Cloud(EC2)</h1></header><div class="page-body"><h1 id="15c31a1a-6fe8-4895-ac95-214397f52a67" class="">Basics</h1><p id="37fa47ad-69a0-47d2-b7c5-1e57a00d4a75" class="">EC2 = Elastic Compute Cloud = IaaS</p><h2 id="fb8f5548-446e-4743-9022-3a2a6de3fd6b" class="">What are EC2&#x27;s capability consists of?</h2><ul id="0ac5a0da-0cc1-4f8c-9f57-71097f3569f4" class="bulleted-list"><li>Renting virtual machine(EC2)</li></ul><ul id="1dc5d2a2-73b0-4864-9bc8-8512b726227f" class="bulleted-list"><li>Storing data on virtual drives(EBS)</li></ul><ul id="7c1b508c-1810-45a7-92ee-31cd6901718e" class="bulleted-list"><li>Distributing load across machines(ELB)</li></ul><ul id="bfda9454-a31b-4c19-a5ff-f15bc7879cea" class="bulleted-list"><li>Scaling the service using an auto-scaling group(ASG)</li></ul><p id="9607d7f8-0eb1-429a-9453-5709af7fc934" class="">
+</p><p id="edf8c775-5345-44df-8248-864503bdb00a" class="">
+</p><p id="7191b935-33ba-45ba-be79-7203d4632317" class="">
+</p><h1 id="386f7c75-7ec6-408f-8be5-1910ad8713df" class="">EC2 sizing &amp; config option</h1><ul id="414cc673-4adb-4726-8a54-13c9ac342ee2" class="bulleted-list"><li>OS: Linux, Windows or MacOs</li></ul><ul id="fa0a653a-0634-470b-b399-6ec94bbbd5cd" class="bulleted-list"><li>How much CPU</li></ul><ul id="b2fb573a-4c54-4c80-ac10-2de49bf50196" class="bulleted-list"><li>How much RAM</li></ul><ul id="4b208498-b63f-4286-a974-e751a3fabfb1" class="bulleted-list"><li>How much storage space <ul id="0db936cf-fbec-4b2f-aea3-c47497b0892b" class="bulleted-list"><li>Network-attached(EBS &amp; EFS)</li></ul><ul id="381ba77b-f6e1-4b21-9668-e5d435d391e9" class="bulleted-list"><li>Hardware (Ec2 instance Store)</li></ul></li></ul><ul id="c74225e6-07c1-4e9c-aa15-1680b71d04bd" class="bulleted-list"><li>Network card: speed of the card, Public IP Address</li></ul><ul id="b5fc2f72-83b0-40be-babb-0fcce1904b9f" class="bulleted-list"><li>Firewall rules: security group</li></ul><ul id="8aa453ad-1110-4359-b013-61d4eaf30606" class="bulleted-list"><li>Bootstrap Script: EC2 User Data</li></ul><p id="b928fdfc-401f-4c1f-8569-8ef2b2e19213" class="">
+</p><p id="7323734c-9a84-496a-b364-1b6438e64916" class="">
+</p><p id="60536ae8-ad01-4348-9a1b-4f2f06b2b7e9" class="">
+</p><h1 id="ea5b0cac-59ce-47a1-9d1c-c7bafb74d0b7" class="">EC2 User Data</h1><ul id="1aca8e33-4bf8-4c2c-8f96-55d461ab2f87" class="bulleted-list"><li>It&#x27;s a script that&#x27;s only ran once at the inception of the instance </li></ul><ul id="5acb1fb0-aeee-4c57-9733-85ac1abce753" class="bulleted-list"><li>It&#x27;s used to automate boot tasks such as:-<ul id="9e3df230-4508-4419-8392-bad3114efb25" class="bulleted-list"><li>Installing Update</li></ul><ul id="a3bad4f2-3c14-467d-a1d5-54c14ccd39d0" class="bulleted-list"><li>Installing required softwares</li></ul><ul id="2614e602-6426-477d-8cd3-da173c5109a6" class="bulleted-list"><li>Download common files</li></ul><ul id="a096e2bb-eba4-43bd-b62e-8af23aa236aa" class="bulleted-list"><li>Literally anything</li></ul></li></ul><ul id="0520720c-b970-4ca6-87d6-a3ba9edcd33e" class="bulleted-list"><li>The EC2 User Data Script runs with the root user.</li></ul><p id="d62036c8-d2ad-4ec0-a871-b9503aa30d9f" class="">
+</p><p id="dabd412f-190f-4dac-a21b-5dff4c41d0ff" class="">
+</p><p id="eb15902c-f40d-4251-8016-a1a0c7e7bf0e" class="">
+</p><h1 id="5c773e2d-7044-45a7-be2c-f4277ba98ee2" class="">EC2 Instance Types- Overview</h1><p id="8c05d996-bb1e-45d4-88c6-f89b842ac334" class="">eg:- m5.2xlarge</p><ul id="dfbaa535-aa82-49b8-85b2-ef721e41de77" class="bulleted-list"><li>m: instance class</li></ul><ul id="3503f5f1-b146-492b-8231-de87e5619182" class="bulleted-list"><li>5: generation(AWS improves them overtime)</li></ul><ul id="31ad43e9-77e7-40a3-a22e-1d433f8bc40d" class="bulleted-list"><li>2xlarge: size within the instance class</li></ul><p id="22399ed1-8c91-4085-a993-99ba77b14a93" class="">
+</p><p id="fbc322ad-e6cf-4708-8834-c6b68c376aa5" class="">
+</p><p id="5f246c43-35c5-44fe-94e6-7a5fd02e6c24" class="">
+</p><h1 id="3999f181-ce9b-477c-a267-1b2afab394e0" class="">EC2 Instance Types - General Purpose</h1><ul id="9a759305-54d0-4e46-9326-dea69daf6b94" class="bulleted-list"><li>Great for diversity of workloads such as web servers or code repo&#x27;s</li></ul><ul id="77bb4408-e3d4-4c6a-93e9-59de55b511e0" class="bulleted-list"><li>Balance between:-<ul id="2fe534cd-f10c-4761-ba42-c97723c1cf08" class="bulleted-list"><li>Compute</li></ul><ul id="9a812176-e3e7-4335-accd-ac025bf7fc9b" class="bulleted-list"><li>Memory</li></ul><ul id="ea516511-ef2b-4893-8842-71453408ab5d" class="bulleted-list"><li>Networking</li></ul></li></ul><p id="a6b9995f-76b0-47bb-894b-3e87c2170648" class="">
+</p><p id="4f2d77e3-2a01-4330-9a96-8038b991047c" class="">
+</p><p id="1b050c70-9b24-4646-9fb5-4143f70c0550" class="">
+</p><h1 id="9b083920-cd9a-41f6-8b96-4abeb416e846" class="">EC2 Instance Type - Compute Optimized</h1><ul id="c8ceed1c-049b-473f-aeb0-dc2837b17367" class="bulleted-list"><li>Great for compute-intensive tasks that requires high performance processes:-<ul id="3a88a3bf-6082-4e1b-b0a2-e0566c9af568" class="bulleted-list"><li>Batch Processing Workloads</li></ul><ul id="38b7b690-14b1-49f3-8a75-0ad7a29a755d" class="bulleted-list"><li>Media transcoding</li></ul><ul id="8268464a-b749-471b-a947-369181875549" class="bulleted-list"><li>High performance web servers</li></ul><ul id="5a6df152-9e9f-4683-a039-7b21ebe016e6" class="bulleted-list"><li>High performance computing </li></ul><ul id="07923a78-cb17-49de-a3c7-4589eb49b240" class="bulleted-list"><li>ML</li></ul><ul id="2305c546-e308-4428-8f0b-6cf78f1b53e1" class="bulleted-list"><li>Dedicated Gaming Server</li></ul></li></ul><p id="3a1fcad7-801a-422d-bf85-e93266a276fe" class="">
+</p><p id="3fd25689-82fb-48bb-af40-591664672429" class="">
+</p><p id="75e94e4c-e7b5-4934-85f9-205f5f8ac66a" class="">
+</p><h1 id="a4fce8b8-697a-45f4-8f41-deed94e71d89" class="">EC2 Instance Type - Memory Optimized</h1><ul id="725171e3-bc01-4282-9e9b-3811c9447455" class="bulleted-list"><li>Fast performance for workloads that process large data sets in memory</li></ul><ul id="4ffcee4a-8f51-4b74-bac3-1a0e45c62e58" class="bulleted-list"><li>Use Cases:-<ul id="11901981-41a2-4b39-8a1e-5c576f7ee930" class="bulleted-list"><li>High performance, relational/non-relational db</li></ul><ul id="2ec34673-3ef4-4335-89dc-03f3c6517c78" class="bulleted-list"><li>Distributed Web Scale cache stores</li></ul><ul id="88c6b394-9f29-4ad8-a4d3-61864a6a9c27" class="bulleted-list"><li>BI</li></ul><ul id="f4aa4162-8e39-405c-901c-5090fa7b5210" class="bulleted-list"><li>Application performing real-time processing of big unstructured data</li></ul><p id="a68a515c-01f4-4422-9387-3ba3e4f7fe7e" class="">
+</p><p id="73e8404a-6ef9-4028-b769-27b311c17901" class="">
+</p></li></ul><h1 id="05ce57d6-515a-42a7-8d65-412ad3185ce8" class="">EC2 Instance Type - Storage Optimized</h1><ul id="1c050cd6-080d-4448-a0d4-872744743508" class="bulleted-list"><li>Great for storage-intensive tasks that requires high, sequential read and write access to large data sets on local storage</li></ul><ul id="d354fe4f-59eb-45b2-9025-cf65cf289157" class="bulleted-list"><li>Use Cases:-<ul id="6843e3d9-0390-4fde-ac7f-f792dcabda7b" class="bulleted-list"><li>High frequency online tx processing</li></ul><ul id="5d720368-a888-408a-a2d2-23468bb5e434" class="bulleted-list"><li>Relational &amp; NoSQL db</li></ul><ul id="e45c37d4-7415-4f7b-915b-dad955dacd16" class="bulleted-list"><li>Cache for in-memory db</li></ul><ul id="b992c84b-5ca9-4832-82ca-f2431f180370" class="bulleted-list"><li>Data warehousing application</li></ul></li></ul><p id="09b78608-8393-4705-a8b7-8a3831b5985b" class="">
+</p><p id="561f0b34-fe7e-4d60-a167-d4a1937385eb" class="">
+</p><p id="1f5701a9-c2a9-4e65-8420-ee571e545e79" class="">
+</p><h1 id="d37433f2-73df-4fee-9ad5-4f869df830af" class="">Security Groups</h1><h2 id="2b2da794-8f09-4d39-8864-ebe7ab1656b0" class="">Intro</h2><ul id="6989d521-d763-4c0f-97ca-d6734fc9d32e" class="bulleted-list"><li>Security Groups are the fundamental of network security in AWS</li></ul><ul id="b2166b91-6e26-469a-a144-d00913cf42f9" class="bulleted-list"><li>They control how traffic is allowed into or out of our EC2 Instances</li></ul><ul id="17681fcf-15bd-4676-af54-9de5a116d327" class="bulleted-list"><li>Security Groups only contains allow rules</li></ul><ul id="05cd3002-5f69-43d4-9e35-aa74505eb115" class="bulleted-list"><li>Security Groups rules can reference by IP or by Security Group</li></ul><h2 id="8a687377-d85e-4a42-8b6e-30f0e49005f8" class="">Deep Dive</h2><ul id="24bd7d6b-754b-468a-91f6-b059abddd1a2" class="bulleted-list"><li>Security Groups are acting as a &quot;firewall&quot; on EC2 Instances</li></ul><ul id="27e43c64-7f05-4f9a-8684-f698fc3cda39" class="bulleted-list"><li>They regulate<ul id="895a80b5-a15c-4672-9ede-ed4cc151ba71" class="bulleted-list"><li>Access to Ports</li></ul><ul id="33cc2013-4544-4d00-b424-211194a2c868" class="bulleted-list"><li>Authorised IP ranges- IPv4 and IPv6</li></ul><ul id="4850699e-9f91-4c14-afa1-b045a09fcffa" class="bulleted-list"><li>Control of inbound network(from other to the instance)</li></ul><ul id="43d44748-2c45-4b05-bd4f-85e1ca42b400" class="bulleted-list"><li>Control of outbound network(from the instance to other)</li></ul></li></ul><h2 id="39f3db80-0426-4084-8052-410ca6833170" class="">General</h2><ul id="d763f224-ba5c-4b64-9538-40782cb614aa" class="bulleted-list"><li>Can be attached to multiple instances</li></ul><ul id="d2c637a3-2b0e-4032-865f-210508b9e03a" class="bulleted-list"><li>Locked down to a region/VPC combination</li></ul><ul id="0004599d-2783-4e74-ab39-244691aaeb87" class="bulleted-list"><li>Does live &quot;outside&quot; the EC2- if traffic is blocked the EC2 instance won&#x27;t see it</li></ul><ul id="867e53f8-028a-433c-b4b0-43208af7633f" class="bulleted-list"><li>It&#x27;s good to maintain one separate security group for SSH access</li></ul><ul id="e708e3c3-1084-402f-ac24-d225e4cfb804" class="bulleted-list"><li>If your application is not accessible(time out), then it&#x27;s a security group issue</li></ul><ul id="96b8c469-fed7-43fa-9de6-7ee03eda34ad" class="bulleted-list"><li>If your application gives a connection refused error, then it&#x27;s an application error or it&#x27;s not launched</li></ul><ul id="33a74ac6-5da6-4401-9ccf-d30ef6d39187" class="bulleted-list"><li>All inbound traffic is blocked by default</li></ul><h2 id="0ea26946-310c-4887-9cae-6d762375f646" class="">Classic Ports</h2><ul id="4e74a560-b2bd-4ad0-b887-145222234011" class="bulleted-list"><li><strong>22 </strong>= SSH(Secure Shell)- log into a Linux instance</li></ul><ul id="a8edaa78-1c87-4c31-b92e-fc5af23e2541" class="bulleted-list"><li><strong>21</strong> = FTP(File Transfer Protocol)- upload files into a file share</li></ul><ul id="563ab93c-295a-431f-9720-4b18a45e1b81" class="bulleted-list"><li><strong>22 </strong>= SFTP(Secure File Transfer Protocol)- upload files using SSH</li></ul><ul id="e5b2ee04-b62f-42ca-809a-652a22264fb2" class="bulleted-list"><li><strong>80 </strong>= HTTP- access unsecured websites</li></ul><ul id="63e12268-96a5-4772-a974-3f35643039b5" class="bulleted-list"><li><strong>443 </strong>= access secured websites</li></ul><ul id="12940f57-00fc-4539-a36b-a39c18f0be6a" class="bulleted-list"><li><strong>3389 </strong>= RDP(Remote Desktop Protocol)- log into a Windows instance</li></ul><p id="13e58b9b-7cf6-4258-92dd-b45144c5d78f" class="">
+</p><p id="1f582644-d7c9-4e44-baf1-7430401fb330" class="">
+</p><p id="f89552cd-273b-4be5-a0ae-569cc457daad" class="">
+</p><h2 id="2324cc6f-6f1d-46fd-b447-c6209d881578" class="">SSH</h2><ul id="5acb3f7d-76fe-4380-a7b4-41e0369a3586" class="bulleted-list"><li>SSH is one of the most imp function. It allows you to control a remote machine, all using the terminal</li></ul><ul id="b5646e26-7801-49f6-bf3b-da364db51ea4" class="bulleted-list"><li>To connect to instance with SSH, you need to give the keys and then connect to instance with SSH. </li></ul><ul id="0a6d101f-3f87-46b9-b5da-52ae93bd0ea8" class="bulleted-list"><li>Basically you can connect to the terminal of instance that&#x27;s on cloud with your local terminal</li></ul><p id="e4540327-b347-448d-aac3-d56cc48739e1" class="">
+</p><p id="50429f27-045b-4967-b5f0-e8b7e1673d89" class="">
+</p><p id="72a694b4-816c-458c-878d-5d169a84271c" class="">
+</p><h2 id="f5f86124-b958-44f5-ac92-107a05e43975" class="">EC2 Instance Purchasing Options</h2><ul id="fd19b072-883b-4389-9210-f7262606d7c2" class="bulleted-list"><li><strong>On-Demand Instace</strong>: Short workload, predictable pricing</li></ul><ul id="bc43ca83-c262-424a-8e57-d9244a999687" class="bulleted-list"><li><strong>Reserved</strong>:(Minimum 1 year)<ul id="1449ef88-d6b6-4234-8c2e-99c2fd2f718d" class="bulleted-list"><li><strong>Reserved Instances</strong>: Long workloads</li></ul><ul id="7b91d9c1-a6ea-4dbb-a388-478949081386" class="bulleted-list"><li><strong>Convertible Reserved Instances</strong>: Long workloads with flexible instances</li></ul><ul id="f7dc314d-d62c-43ad-b8e2-4cebda8e5cf2" class="bulleted-list"><li><strong>Scheduled Reserved Instances</strong>: eg Every Thursday between 3 and 6 pm</li></ul></li></ul><ul id="fe9a7b4d-2222-4d63-b226-bef67bd42dd7" class="bulleted-list"><li><strong>Spot Instances</strong>: Short workloads, cheap, can lose instances (less reliable)</li></ul><ul id="b4322c5c-8e11-4f28-b5f2-a12c2b66da44" class="bulleted-list"><li><strong>Dedicated Hosts</strong>: Book an entire physical server, control instance placement. </li></ul><h2 id="8aca1cb6-c668-4703-8a22-763b1d21cecf" class="">EC2 on Demand</h2><ul id="f2ddf5c9-3874-4376-847c-9df1c0f0d0f7" class="bulleted-list"><li>Pay for what you use:<ul id="49ab42c1-bc13-4161-99e3-b6d869febd76" class="bulleted-list"><li>Linux- billing per sec, after the first min</li></ul><ul id="0f3dc1ab-af3d-4a4b-8dde-d4b5b5fd2220" class="bulleted-list"><li>All other OS- billing per hour</li></ul></li></ul><ul id="0378dc70-4490-452c-8389-780f39d50412" class="bulleted-list"><li>Has the highest cost but no upfront payment</li></ul><ul id="d3b93528-b58b-4783-8f5f-f7613a6a3c8b" class="bulleted-list"><li>No long-term commitment</li></ul><ul id="4704ddea-e1df-4b2f-b78b-fbaeb1c8aab6" class="bulleted-list"><li>Recommended for <strong>short-term</strong> and <strong>un-interrupted workloads</strong>, where you can&#x27;t predict how the application will behave</li></ul><h2 id="1cf1fd54-2e85-43ac-9d41-44fb6aa4c7fc" class="">EC2 Reserved Instances</h2><ul id="ec85def7-dff9-455a-a361-2b421775f0de" class="bulleted-list"><li>Upto 75% discount compared to On-Demand</li></ul><ul id="9d989051-0f84-4db9-a76e-46f12411ea9f" class="bulleted-list"><li>Reservation period: 1 year = + discount | 3 years = +++ discount</li></ul><ul id="f2b52952-0b0c-42e0-a9b3-58fe61400846" class="bulleted-list"><li>Purchasing options: no upfront | partial upfront = +|All upfront = ++</li></ul><ul id="96240d10-a666-4bf9-b737-6cad57e9cfb5" class="bulleted-list"><li>Reserve a specific instance type</li></ul><ul id="87e5c2a9-deb8-4809-a9ea-ad5eb31bfee6" class="bulleted-list"><li>Recommended for steady-stage usage application(DB)</li></ul><p id="048f94bf-3d8b-4194-8d45-91739ff08fb7" class="">
+</p><ul id="e6cbb287-2485-44e4-b030-6cdd4f99b16a" class="bulleted-list"><li>Convertible Reserved Instance<ul id="e3f2d1fa-6387-43ab-a085-248a353d51e0" class="bulleted-list"><li>Can change the EC2 instance type</li></ul><ul id="5c7b55b6-cb2c-4cad-a18e-2244387caa41" class="bulleted-list"><li>Up to 54% discount</li></ul></li></ul><ul id="c1b7405c-2d4f-4ab5-8589-1189e5ab7f55" class="bulleted-list"><li>Scheduled Reserved Instances</li></ul><h2 id="01c7d4c3-2c88-4404-b7d8-1210d7290ac8" class="">EC2 Spot Instances</h2><ul id="478ecb34-dcf6-47fa-b0ab-f1fb2f4eaece" class="bulleted-list"><li>Can get a discount up to 90% compared to On-Demand</li></ul><ul id="5b2dc568-42fb-4ebd-9df2-2f9299199c8d" class="bulleted-list"><li>Instances that can &quot;lose&quot; at any point of time if your max price is less than the current spot price</li></ul><ul id="a000b3f4-0209-4cd8-9af3-000a54d4443c" class="bulleted-list"><li>The Most cost-efficient instance in AWS</li></ul><ul id="4784b368-b30c-473d-a9e5-5ac8ea78be3b" class="bulleted-list"><li>Not suitable for critical jobs or DB</li></ul><p id="b539e7b6-5941-4475-8bbc-a9b4b1285b6d" class="">
+</p></div></article></body></html>

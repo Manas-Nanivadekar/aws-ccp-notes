@@ -1,0 +1,637 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cloud Concepts</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="63d60af2-58b6-437e-8679-caf29999d1aa" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">🥅</span></div><h1 class="page-title">Cloud Concepts</h1></header><div class="page-body"><h1 id="ca855e2a-601d-476f-9e1f-f2500fad8eb0" class="">What is Cloud Computing</h1><p id="db9fbcf5-7c40-41c4-abc5-35f3d26d8167" class="">The practice of using network of remote servers hosted on the Internet to store, manage, and process data, rather than a local server or a personal computer. </p><p id="88e30116-ffac-4d71-9714-6e7c077a2b44" class="">
+</p><h2 id="3cde06ff-beb8-41af-a569-8503b83686ad" class="">On-Premise</h2><ul id="4a3548b7-432f-4aae-9277-8e95856c3a6a" class="bulleted-list"><li>You own the server</li></ul><ul id="0ada031a-38a6-4610-8fd2-a71d9ae67e12" class="bulleted-list"><li>You hire the IT people </li></ul><ul id="96fc02dd-11fb-4a72-a8cf-905538143a95" class="bulleted-list"><li>You pay or rent the real-estate</li></ul><ul id="670d78a1-4cc7-4fa6-a50e-2789862df012" class="bulleted-list"><li>You take all the risk</li></ul><h2 id="25770d62-8860-43b5-b117-dada1a173816" class="">Cloud Providers</h2><ul id="8961d463-405f-4950-a3de-64eedcd7f30a" class="bulleted-list"><li>Someone else own the servers</li></ul><ul id="6563cea6-9139-4a75-a641-78b4b026f388" class="bulleted-list"><li>Someone else hires the IT people</li></ul><ul id="bd251ac8-d8f0-490d-b425-f28f252e2871" class="bulleted-list"><li>Someone else pays or rents the real-estate</li></ul><ul id="b2c18bb2-9415-47f7-a10a-ec3190cb92ce" class="bulleted-list"><li>You are responsible for configuring cloud services and code, someone else take care of the rest.</li></ul><h1 id="d68e0b50-f08d-4ee3-bf1e-287fdfe92912" class="">Six Advantages and Benefits of Cloud Computing</h1><h2 id="97cef4c9-99c2-4de7-a801-156fef3f0a7d" class="">Trade Capital Expense for Variable Expense</h2><ul id="8f2b2000-ee5b-4947-b7f2-7f97f004cae0" class="bulleted-list"><li>No up-front cost.</li></ul><ul id="4bc023b6-3715-4252-8395-e43f8bf5c56c" class="bulleted-list"><li>Instead of paying for data centers and servers, <strong>Pay-On-Demand</strong>.</li></ul><ul id="118fc79e-ecc7-4b14-8323-c33845a8ebb0" class="bulleted-list"><li>Pay only when you consume computing resources.</li></ul><h2 id="c0ac2112-780d-4e1b-a320-edfda06549f7" class="">Benefit from Massive Economies of Scale </h2><ul id="beba3d8e-928b-4983-aa2a-57237e06d537" class="bulleted-list"><li>Usage from hundreds of thousands of customers aggregated in the cloud.</li></ul><ul id="96ea5498-cb8d-4ead-8161-2f1c3890db6f" class="bulleted-list"><li>You are sharing the cost with other customers to get unbeatable savings. </li></ul><h2 id="61821acf-9d2f-4c5e-a33a-96bfd76263c8" class="">Stop Guessing Capacity</h2><ul id="e10ee6d7-eec3-4727-8216-5921e12ad18a" class="bulleted-list"><li>Eliminate guesswork about infrastructure capacity needs</li></ul><ul id="464fa3a2-7c09-4509-81b7-4346692a57bc" class="bulleted-list"><li>Instead of paying for idle or underutilised servers, you can scale up or down to meet the current needs.</li></ul><h2 id="69987c4b-47a1-4ea3-982e-6dc441ca3f9b" class="">Increase Speed and Agility </h2><ul id="f221d5b6-86d3-4e27-9687-16b404e04beb" class="bulleted-list"><li>Launch resources within few clicks in minutes instead of waiting days or even weeks of your IT to implement the solution on-premise</li></ul><h2 id="e59c7b93-815e-4988-8e02-d9e2e4282983" class="">Stop Spending Money on Running and Maintaining Data Centers</h2><ul id="ca4ac234-0a4f-40dd-ad72-7131625090d5" class="bulleted-list"><li>Focus on your own customers, rather than on heavy lifting of racking, stacking, and powering servers</li></ul><h2 id="10b487ce-2019-4a13-91b2-60e189aafa67" class="">Go Global in Minutes </h2><ul id="794d217b-8b89-4c2c-8f03-5078ee225a77" class="bulleted-list"><li>Deploy your app in multiple regions around the world with a few clicks.</li></ul><ul id="0276e617-3d66-4eec-80a9-e30492c238a5" class="bulleted-list"><li>Provide low latency and a better experience for your customers at minimal cost.</li></ul><h1 id="9d748f20-433b-42bc-8582-7d3bb606247d" class="">Types of Cloud Computing</h1><h2 id="cb04aaab-6bba-439b-9ccd-3c87fa01d13a" class="">Infra as a Service(IaaS)</h2><ul id="9daa727e-2436-4928-9ea3-ec989b35f97a" class="bulleted-list"><li>Provide building block for cloud IT</li></ul><ul id="c8257633-4521-40b4-afaf-907f04010ed6" class="bulleted-list"><li>Provides networking, computers, data storage space</li></ul><ul id="47c1556f-ffc4-44b2-92d8-f8ccc91c6f3e" class="bulleted-list"><li>Highest level of flexibility</li></ul><ul id="ca792975-7042-400c-9d2f-e47016619824" class="bulleted-list"><li>Easy parallel with traditional on-premises IT</li></ul><h2 id="f2a3f5d1-d5c8-40e2-9568-75e2ce9f4c08" class="">Platform as a Service(PaaS)</h2><ul id="68b47275-4463-4f8a-bf90-ae7cfdb8c3b2" class="bulleted-list"><li>Removes the need for your organisation to manage the underlying infra.</li></ul><ul id="3d51e9ee-2c28-4ac9-baaa-0cc24a4fdb81" class="bulleted-list"><li>Focus on the deployment and management of your application</li></ul><h2 id="f32ca6be-5203-47f0-9934-75b4cf52234e" class="">Software as a Service(SaaS)</h2><ul id="cd3ba7c5-1147-4877-8a05-5433b1c5a762" class="bulleted-list"><li>Complete product that is ran and managed by the service provider</li></ul><h1 id="932f48a4-9b1c-47bf-a9e2-d8d3ee8da9ae" class="">Examples </h1><h2 id="f7c8e823-a860-4cf0-9fe7-8f891d593077" class="">IaaS</h2><ul id="2b63392b-82c4-4161-bf2f-4148764854c8" class="bulleted-list"><li>Amazon EC2</li></ul><ul id="1debd641-afc0-419c-b1d3-9023f2ee37e9" class="bulleted-list"><li>GCP, Azure, Rackspace,ect.</li></ul><h2 id="597dd6cd-bdd6-4240-86ac-c33261db478c" class="">PaaS</h2><ul id="a302a77c-4a3b-45ea-879f-c6f9f713022d" class="bulleted-list"><li>Elastic Beanstalk(AWS)</li></ul><ul id="46b93ccd-b009-4154-9fe1-e335c066a035" class="bulleted-list"><li>Heroku, Google App Engine, etc.</li></ul><h2 id="b81f720b-13fe-4329-9fdb-5da66603f3bf" class="">SaaS</h2><ul id="40bde228-602f-4f37-8aa1-ac5ac086d4f6" class="bulleted-list"><li>Gmail, Dropbox, Zoom, etc.</li></ul><h1 id="2e04bf40-3754-448a-b613-5abded920e1a" class="">Pricing of the Cloud(AWS)</h1><p id="36a03d09-06dc-4d23-a702-e1b9a4f8dcb2" class="">AWS has 3 pricing fundamentals, following are the pay-as-you-go pricing model.</p><h2 id="4fddb60f-7a2b-4fd1-a10d-578d9bad5e40" class="">Compute</h2><ul id="69f961bc-7311-4763-b5d0-f4bdee41e936" class="bulleted-list"><li>Pay for compute time</li></ul><h2 id="950e93bf-d423-44a2-87f3-6b25c92a0fc3" class="">Storage</h2><ul id="a403ed74-b982-4462-99ce-0a0a3603d5f7" class="bulleted-list"><li>Pay for data stored in the cloud</li></ul><h2 id="f3d58e7a-8da1-4434-8546-091223dfc16b" class="">Data transfer OUT of the cloud</h2><ul id="1454f849-3935-44e2-a572-1d8ba674c8e7" class="bulleted-list"><li>Data transfer IN is free</li></ul><h1 id="708c7c5b-322d-443a-b706-3205119afc7a" class="">Shared Responsibility</h1><ul id="415bae4f-fa35-4847-9aa6-aaaff18951cd" class="bulleted-list"><li>Customer = Responsibility for the security <em><strong>IN </strong></em>the cloud.</li></ul><ul id="c0ff441c-88c2-4a2c-9607-e782b33d5f06" class="bulleted-list"><li>AWS = Responsibility <strong><em>Of</em></strong> the cloud. </li></ul></div></article></body></html>

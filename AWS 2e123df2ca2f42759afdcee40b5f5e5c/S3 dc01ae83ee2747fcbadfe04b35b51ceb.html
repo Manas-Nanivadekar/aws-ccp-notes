@@ -1,0 +1,664 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>S3 </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dc01ae83-ee27-47fc-badf-e04b35b51ceb" class="page mono"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🎿</span></div><h1 class="page-title">S3 </h1></header><div class="page-body"><h1 id="69460a77-d4e6-443d-88c0-674e136090a0" class="">Buckets</h1><ul id="1a4834ce-84cb-4cc7-a51b-38a35af260b0" class="bulleted-list"><li>Amazon S3 allows people to store objects(<em>files</em>) in buckets(<em>directories</em>)</li></ul><ul id="33f0fc66-27c1-4e87-a011-1d770a5033ec" class="bulleted-list"><li>Buckets must have a <strong>globally unique name(across all regions and all accounts)</strong></li></ul><ul id="b4340222-22f0-432a-91ca-cf88896dd8e3" class="bulleted-list"><li>Buckets are defined at the region level</li></ul><ul id="177c05d3-9ddd-4131-a8a3-e2ebf1ddb885" class="bulleted-list"><li>S3 looks like a global service but buckets are created in a region </li></ul><p id="e3da8490-6916-4be6-bb9f-b7aa76363511" class="">
+</p><p id="7c55dc4d-3d7f-4dc9-8be0-9267b6a6e7e2" class="">
+</p><p id="49bb3306-a8b6-456e-b0b3-943141fe82e1" class="">
+</p><h1 id="161658ae-dc69-434f-ab33-f81be347a0ff" class="">Objects</h1><ul id="9da8c3e8-39a1-4684-8654-ff4b40598920" class="bulleted-list"><li>Objects(<em>files</em>) have a key</li></ul><ul id="95deba74-5b18-4a2f-95b7-561e18d2cadd" class="bulleted-list"><li>The Key is a full path:<ul id="eec258cf-1b00-4950-a1cc-f86838e518dd" class="bulleted-list"><li>s3://my-bucket/my_file.txt</li></ul><ul id="59adb504-0cd3-4b40-a287-46918fbe78ea" class="bulleted-list"><li>s3://my-bucket/my_folder/another_folder/my_file.txt</li></ul></li></ul><ul id="d8759d8c-7e21-4960-8d5b-a5157bff40d0" class="bulleted-list"><li>The key is composed of <em>prefix + object name</em></li></ul><ul id="8f9b133c-b97f-4416-a08c-b28cde2e2222" class="bulleted-list"><li>There&#x27;s no concept of &quot;directories&quot; within buckets</li></ul><ul id="e3ef0521-63ea-46a2-ad74-cb5b3b06c516" class="bulleted-list"><li>Just keys with very long names that contain slashes</li></ul><ul id="b334ece0-2908-4223-8a23-05128897b991" class="bulleted-list"><li>Object values are the content of the body:<ul id="ba659eb1-f9e2-4b7f-b909-68a2076bb64c" class="bulleted-list"><li>Max Object Size is 5TB(5000GB)</li></ul><ul id="473b3aa8-ee2a-4802-bc4a-036ab6daa648" class="bulleted-list"><li>If uploading more than 5GB, must use &quot;multi-party upload&quot;</li></ul></li></ul><p id="8bcd85b8-46d2-484c-a257-e20926d48241" class="">
+</p><p id="518fe7cb-be26-4191-a546-c5cc5e458bf5" class="">
+</p><p id="5bbe1271-3014-49a3-9b6f-b6e80dc3e4c4" class="">
+</p><h1 id="4f040427-4f9b-4662-8b4c-58dd743f3b01" class="">Security </h1><ul id="ae7280d6-ac3b-4783-8df1-175d4832fe6a" class="bulleted-list"><li>User Based<ul id="4f07b3f3-8eef-4bd2-9609-0093ed0e3907" class="bulleted-list"><li>IAM policies- which API calls should be allowed for a specific user from IAM console</li></ul></li></ul><ul id="22d9ffe5-b1b8-4621-896b-a85058ec0506" class="bulleted-list"><li>Resource Based<ul id="0d8de9c5-393e-4d75-951b-7398d5a102c0" class="bulleted-list"><li>Bucket Policies- bucket wide rules from the S3 console- allows cross account</li></ul><ul id="57b203e1-4cae-46de-8ef2-ec56a2777dcb" class="bulleted-list"><li>Object Access Control List (ACL)- finer grain </li></ul><ul id="eae8164e-b910-4484-86f0-626c6ed218a1" class="bulleted-list"><li>Bucket Access Control List (ACL)- less common</li></ul></li></ul><ul id="95e3ceac-1677-40c0-a109-7d7275a967ed" class="bulleted-list"><li>Note: an IAM principal can access an S3 object if<ul id="2194b7f9-d5cb-4e15-b516-1e38e70307f9" class="bulleted-list"><li>the user IAM permissions allow it OR the resource policy ALLOWS it</li></ul><ul id="39cc0f4b-3f2b-431b-966b-f0d358226591" class="bulleted-list"><li>AND there&#x27;s no explicit DENY</li></ul></li></ul><ul id="a17b3414-fc11-4b0e-8b27-e410343bfd59" class="bulleted-list"><li>Encryption: encrypt objects in Amazon S3 using encryption keys</li></ul><h2 id="05ac4faa-2593-4826-89f0-f9e84d4dcbb7" class="">Example: Public Access - Use Bucket Policy</h2><figure id="863a0750-dda6-42ca-99c4-b65f367d40c4" class="image"><a href="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled.png"><img style="width:1047px" src="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled.png"/></a></figure><h2 id="f6f96aa5-911d-4cdb-9c88-59679f7caccc" class="">Example: User Access to S3- IAM Permissions</h2><figure id="2d8cb00c-a050-4bcd-be18-da37b6495901" class="image"><a href="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%201.png"><img style="width:954px" src="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%201.png"/></a></figure><h2 id="c35e4835-f9b9-42e4-b84c-cb83b53d9964" class="">Example: EC2 instance access- Use IAM Roles</h2><figure id="9275971b-dca0-4279-9a24-109fb99be746" class="image"><a href="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%202.png"><img style="width:1008px" src="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%202.png"/></a></figure><h2 id="e8ad5602-b000-403f-bb2d-79105dc11f48" class="">Advanced: Cross-Account Access- Use Bucket Policy</h2><figure id="aca9001b-d9db-4b4f-9b50-8a48914262f5" class="image"><a href="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%203.png"><img style="width:1170px" src="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%203.png"/></a></figure><h2 id="26efa899-2c0f-45a1-965e-0ef38705dafd" class="">Bucket Policies</h2><ul id="eb13be2e-74c8-49e3-9041-23172fa45dda" class="bulleted-list"><li>JSON based policies<ul id="ae1f7b7c-abf6-4744-91ae-cab306958eba" class="bulleted-list"><li>Resources: buckets and objects</li></ul><ul id="75e8adf5-7373-4d11-995c-64f5fe821226" class="bulleted-list"><li>Actions: Set of API to allow or deny</li></ul><ul id="bba659aa-dc89-46e1-bf7c-a2b4318e1e08" class="bulleted-list"><li>Effect: Allow/Deny</li></ul><ul id="1af4aead-3cf2-460d-98cc-228d95b2f687" class="bulleted-list"><li>Principal: The Account or user to apply the policy to</li></ul></li></ul><ul id="5f77c61e-502d-4abc-b507-b261257deec0" class="bulleted-list"><li>Use S3 bucket for policy to:<ul id="a3629200-eb9d-45f0-a280-eb283cfd9727" class="bulleted-list"><li>Grant public access to the bucket</li></ul><ul id="a486ee48-5aad-4704-842d-54b8eeaa860b" class="bulleted-list"><li>Force objects to be encrypted at upload</li></ul></li></ul><p id="7999088f-5545-46c5-af85-ef835d95bc22" class="">
+</p><p id="958dad7d-7972-411c-869e-1fc7ab1be254" class="">
+</p><p id="5d663e1d-62b3-4753-89c4-120280e20544" class="">
+</p><h1 id="3ac53418-cf8a-4b15-8293-c1d221caa312" class="">Website </h1><ul id="f0f70551-b798-4bb0-932a-a757b638d578" class="bulleted-list"><li>S3 can host static websites and have them accessible on the www</li></ul><ul id="5e20fa41-68b7-4500-a83d-a27eaae64c5b" class="bulleted-list"><li>The website URL will be:<ul id="0d208c9d-623e-4805-b5d9-46dfebbe671d" class="bulleted-list"><li>&lt;bucket-name&gt;.s3-website-&lt;AWS-region&gt;.amazonaws.com<p id="a0c5e49d-62ed-4dd2-9adf-9c76f2b26527" class="">Or</p></li></ul><ul id="60ef71ea-a0b6-429b-be54-d1f4ad011c6f" class="bulleted-list"><li>&lt;bucket-name&gt;.s3-website.&lt;AWS-region&gt;.amazonaws.com</li></ul></li></ul><ul id="3ee0699b-7cfc-421b-a814-e043adaed06b" class="bulleted-list"><li>If you get a 403(forbidden) error, make sure the bucket policy allows public reads!</li></ul><p id="9203bc85-67bb-420f-bec3-ca161803b4b8" class="">
+</p><p id="6d90f31f-f36d-4382-9ba2-801d307a2b4c" class="">
+</p><p id="8098db55-f940-44a1-bf09-e6b49869e7e4" class="">
+</p><h1 id="5117e43b-06e0-4ae5-b020-f8e1d0af12fc" class="">Versioning</h1><ul id="7a4a3fd2-23d2-48ef-b7ea-b79f86aa0204" class="bulleted-list"><li>You can version your files in Amazon S3</li></ul><ul id="84f2c60d-1c2c-40f3-acb4-f9c449557969" class="bulleted-list"><li>It is enabled at the bucket level</li></ul><ul id="96dc8058-33b3-4a78-8c32-9ea5cc88dd3d" class="bulleted-list"><li>Same key overwrite will increment the version: 1,2,3</li></ul><ul id="ffba55d4-118a-4386-894d-6eb5513bb513" class="bulleted-list"><li>It is best practice to version your buckets<ul id="70f6fc3c-5187-4394-adfc-925e140eceb3" class="bulleted-list"><li>Protect against unintended deleted (ability to restore a version)</li></ul><ul id="907cbfd6-be16-4c8c-a1d8-9b25debcd732" class="bulleted-list"><li>Easy roll back to previous version</li></ul></li></ul><ul id="e8cce9f8-7135-4558-a2db-d6a8e9790601" class="bulleted-list"><li>Notes:<ul id="d9ae968b-99e9-4815-be01-54a08ada56fc" class="bulleted-list"><li>Any file that is not versioned prior to enabling versioning will have version &quot;null&quot;</li></ul><ul id="6fdccb10-2731-4dae-a258-d742e035d743" class="bulleted-list"><li>Suspending versioning does not delete previous versions</li></ul></li></ul><p id="37fd97cb-7faa-41ac-85e8-5c1fd838ec4d" class="">
+</p><p id="349ed00b-7304-400d-b00b-79b5c3dd736d" class="">
+</p><p id="256272a0-cafb-4e72-ba4d-ae0e54d9369d" class="">
+</p><h1 id="2c0f913d-254f-4488-a98f-9ae914e95202" class="">Access Log</h1><ul id="e3068cda-27e8-4db2-aa0a-a8ed4ed4c2e1" class="bulleted-list"><li>For audit purpose, you may want to log all access to S3 buckets.</li></ul><ul id="d244b5ac-c1a8-4427-8883-5a2c35a96317" class="bulleted-list"><li>Any request made to S3, from any account, authorised or denied, will be logged into another S3 bucket</li></ul><ul id="c14248a3-a292-4bcb-bc8c-c0a6d4ec1d41" class="bulleted-list"><li>That data can be analysed using data analysis tools</li></ul><ul id="66bbe4cf-2edf-4a9f-bc67-563a160ec7f3" class="bulleted-list"><li>Very helpful to come down to the root cause of an issue, or audit usage, view suspicious patterns etc. </li></ul><ul id="86df5c99-137c-42f0-8cbe-c87199b1109b" class="bulleted-list"><li>The bucket for logs should be in the same region</li></ul><ul id="32a3e6cc-8efc-4cc4-8c8d-2c7f358d0b92" class="bulleted-list"><li>It take around an hour or two for logs to appear </li></ul><figure id="8b917a9b-4328-4bd3-9392-d4f0b6bf6c7a" class="image"><a href="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%204.png"><img style="width:242px" src="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%204.png"/></a></figure><p id="b0b16219-526d-4803-b2a2-8c14710dffc5" class="">
+</p><p id="19152542-1b72-40fc-bc0d-518469a802c2" class="">
+</p><p id="33409b52-bfd3-4630-bf21-647d75b6cb25" class="">
+</p><h1 id="23a0c31b-2bb4-44cf-a5e0-c4f692fecc8c" class="">Replication(CRR &amp; SRR)</h1><ul id="271947ce-c97c-4cdf-b531-0320bfd65dcd" class="bulleted-list"><li>Must enable versioning in source and destination</li></ul><ul id="b3cd7d78-6fee-4b36-a399-9712e95a6bbf" class="bulleted-list"><li>Cross Region Replication(CRR)</li></ul><ul id="2c8e1576-85f0-4029-a052-72e78dcab82b" class="bulleted-list"><li>Same Region Replication(SRR)</li></ul><ul id="0af40d26-8431-45f0-8faf-1c6f33ba91c9" class="bulleted-list"><li>Buckets can be in different accounts</li></ul><ul id="2706619b-af51-4550-8d42-bcf95d946899" class="bulleted-list"><li>Copying is asynchronous</li></ul><ul id="aac2f28b-5dd2-4cd2-a721-815a47b1032f" class="bulleted-list"><li>Must give proper IAM permissions to S3</li></ul><figure id="c3e529d0-ce73-44f3-804c-860a847b64b1" class="image"><a href="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%205.png"><img style="width:480px" src="S3%20dc01ae83ee2747fcbadfe04b35b51ceb/Untitled%205.png"/></a></figure><ul id="7897f243-3413-418f-a474-303c781492f7" class="bulleted-list"><li>CRR-Use cases: compliance, lower latency, access, replication across accounts</li></ul><ul id="ebaf5fd7-475e-4b70-81e5-ebb0221dfa8b" class="bulleted-list"><li>SRR- Use Cases: Log aggregation, live replication between production and test accounts</li></ul><p id="19ed2290-57df-47df-95bc-c39867bf8481" class="">
+</p><p id="bd1b48fd-5c30-4e4e-ac66-88c64285885a" class="">
+</p><p id="53a872b1-0eef-445c-812e-a0c6db62c292" class="">
+</p><h1 id="d89282bb-0818-4f1b-981c-a8ac6ac33d7e" class="">Storage Class</h1><ul id="38910be4-92b0-4c38-b5ae-4aa3a6466b50" class="bulleted-list"><li>Amazon S3 Standard- General Purpose</li></ul><ul id="a133f571-f28e-46c9-87c6-34073530d5ba" class="bulleted-list"><li>Amazon S3 Standard- Infrequent Access(IA)</li></ul><ul id="422d3c8d-50e8-46cc-b319-c130eb9e33a8" class="bulleted-list"><li>Amazon S3 One Zone-Infrequent Access</li></ul><ul id="c3ba69d5-c2b0-406e-b2a0-515671d8834b" class="bulleted-list"><li>Amazon S3 Intelligent Tiering</li></ul><ul id="7480fe4c-6bf0-4feb-8148-8d68e181a741" class="bulleted-list"><li>Amazon Glacier</li></ul><ul id="b67b9ae5-8d42-45ac-9f30-ce2c858b5a00" class="bulleted-list"><li>Amazon Glacier Deep Archive</li></ul><h2 id="f466a1d2-0d55-446d-a203-937ff5b53ba6" class="">Durability and Availability</h2><ul id="8bd28c1d-c5d9-49d8-9518-5254cffe2c7a" class="bulleted-list"><li>Durability:<ul id="29e29739-885d-4fc4-8bf7-3db59129631a" class="bulleted-list"><li>High durability(99.9999999999%, 11 9&#x27;s) of objects across multiple AZ</li></ul><ul id="b51e1b0a-a2b9-49d4-aa5c-ef8260696b39" class="bulleted-list"><li>If you store 10,000,000 objects with Amazon S3, you can on average expect to incur a loss of single object once every 10,000 years</li></ul><ul id="b9425ada-3b57-42f6-8308-b1f5030dc0a4" class="bulleted-list"><li>Same for all storage classes</li></ul></li></ul><ul id="c7035856-b5b2-49fe-996b-e53a33b24909" class="bulleted-list"><li>Availability:<ul id="f9f729a3-a2ca-4906-965b-266b25e7da84" class="bulleted-list"><li>Measures how readily available a service is.</li></ul><ul id="d7b945b1-dfbf-4a7e-9864-cffd663d4b12" class="bulleted-list"><li>S3 standard has 99.99% availability, that means it will not be available 53 minutes a year</li></ul><ul id="1e617bff-ae92-4579-8594-748cdd1ac7b1" class="bulleted-list"><li>Varies depending on storage class</li></ul></li></ul><h2 id="b46f4692-4f20-4122-acf9-22d26084cede" class="">S3 Standard- General Purposes</h2><ul id="d140c3d7-8d5e-49ec-9973-8f2cdeb9cffb" class="bulleted-list"><li>99.99% Availablity</li></ul><ul id="42e11f14-7cf7-4607-8165-d8dc4152b93f" class="bulleted-list"><li>Used for frequent accessed data</li></ul><ul id="71f09c6c-c641-4414-ac92-8c34814a59b3" class="bulleted-list"><li>Low latency and high throughput</li></ul><ul id="3aa7d1af-0c04-4125-853e-f000ae1f5ada" class="bulleted-list"><li>Sustain 2 concurrent facility failures</li></ul><ul id="260c56f3-dadd-4c1b-914d-4e02b3856a67" class="bulleted-list"><li>Use Cases: Big data analytics, mobile &amp; gaming applications, content distribution...</li></ul><h2 id="a4e385fa-0ffd-44e7-9857-f2da0f26e00d" class="">S3 Standard - Infrequent Access (IA)</h2><ul id="1e1d44c4-2de3-4f70-80a4-22c679c9a5b1" class="bulleted-list"><li>Suitable for data that is less frequently accessed, but requires rapid access when needed</li></ul><ul id="e26c3e5d-e996-4d54-ace2-88ea9ec32172" class="bulleted-list"><li>99.99% availability</li></ul><ul id="9b7c7dc5-df47-4c38-a0d0-8b8518c69333" class="bulleted-list"><li>Lower cost compared to Amazon S3 Standard, but retrieval fee</li></ul><ul id="b5e6cc91-1bfb-4131-b0ad-04538ac779e9" class="bulleted-list"><li>Sustain 2 concurrent facility failures</li></ul><ul id="d0012dbb-d913-421c-bb79-01c6541a3282" class="bulleted-list"><li>Use Cases: As a data store for disaster recovery, backups...</li></ul><h2 id="bf384f58-5ec0-4c71-92cf-47f48ba7c654" class="">S3 Intelligent - Tiering</h2><ul id="e707ee35-07cc-4f1b-bfb6-952d6c53d76e" class="bulleted-list"><li>99.99% Availability</li></ul><ul id="f5fd5ab8-eb06-48b2-a545-6e34202a0d53" class="bulleted-list"><li>Same low latency and high throughput performance of S3 Standard</li></ul><ul id="182d909a-51e0-48fa-b10c-7fc732882d47" class="bulleted-list"><li>Cost-Optimised by automatically moving objects between two access tiers based on changing access patterns:<ul id="a1b5cdf5-49ab-47c4-9b5d-03d94f4a2b1b" class="bulleted-list"><li>Frequent Access</li></ul><ul id="44dabecd-296a-483a-a100-9ad8744cb411" class="bulleted-list"><li>Infrequent Access</li></ul></li></ul><ul id="55d44786-4c26-4c68-bd80-e3470ed643cf" class="bulleted-list"><li>Resilient against events that impact an entire Availability Zone</li></ul><h2 id="e951e2aa-88e9-4744-8a2c-102745e017ac" class="">S3 One Zone - Infrequent Access(IA)</h2><ul id="62c45e53-c3f9-4e76-b95b-6e3da3c2faf2" class="bulleted-list"><li>Same as IA but data is stored in a single AZ</li></ul><ul id="553e43b2-c26c-4ccc-a624-1af37edd41f1" class="bulleted-list"><li>99.5% Availability </li></ul><ul id="5bf24196-a418-40d2-befb-e27850f6219d" class="bulleted-list"><li>Low latency and high throughput performance</li></ul><ul id="fddfbf14-2b02-47df-8383-83839d02c321" class="bulleted-list"><li>Lower cost compared to S3-IA(by 20%)</li></ul><ul id="35d0e316-3a4f-4234-8990-ae5f539cde35" class="bulleted-list"><li>Use Cases: Storing secondary backup copies of on-premise data, or storing data you can recreate</li></ul><h2 id="3daefc5d-d6fe-4c22-b40a-7845f3a87a9a" class="">Amazon Glacier &amp; Glacier Deep Archive</h2><ul id="cc1557a8-e505-4c90-8248-39805fe541b4" class="bulleted-list"><li>Low cost object storage (in GB/month) meant for archiving/backup</li></ul><ul id="83b4d8dc-25f9-44ca-afdd-259120b3bf7f" class="bulleted-list"><li>Data is retained for the longer term(years)</li></ul><ul id="80c846ad-b1e3-4d09-bd95-e3ccfa620878" class="bulleted-list"><li>Various retrieval options of time + fees for retrieval</li></ul><ul id="7739d26d-3842-47ea-b016-30d79446dbb0" class="bulleted-list"><li><strong>Amazon Glacier </strong>- cheap:<ul id="70057fa9-837d-4196-90d3-2eeebd1ec073" class="bulleted-list"><li>Expedited(1 to 5 mins)</li></ul><ul id="7067250f-65db-4bde-8e12-442fc5210d89" class="bulleted-list"><li>Standard(3 to 5 hours)</li></ul><ul id="a558aaf8-c221-415c-af48-37abb86567aa" class="bulleted-list"><li>Bulk(5 to 12 hours)</li></ul></li></ul><ul id="9763288e-3b10-4e8d-b758-025838f125d5" class="bulleted-list"><li><strong>Amazon Glacier Deep Archive</strong>- cheapest:<ul id="2b8c3a57-3ba5-4868-973f-6385e5ac739c" class="bulleted-list"><li>Standard(12 hours)</li></ul><ul id="c791174a-022e-49da-9a72-9cd365e03db8" class="bulleted-list"><li>Bulk(48 hours)</li></ul></li></ul><p id="9f1139f7-8b0a-4367-9cf6-3699d3a35160" class="">
+</p><p id="f5060ec7-6ece-40ee-950d-3cf9030a6e35" class="">
+</p><p id="dfff54d7-1c05-4550-998a-65a21220d7b0" class="">
+</p><h1 id="346a41ac-a519-42ec-bc70-8c33e3522871" class="">Object Lock &amp; Glacier Vault Lock</h1><ul id="20168010-f991-45e5-b97c-3444e8c7d27f" class="bulleted-list"><li><strong>S3 Object Lock</strong><ul id="549827fd-236f-4c7f-8fa3-774d183c2363" class="bulleted-list"><li>Adopt a WORM(Write Once Read Many) model</li></ul><ul id="29c09147-8419-4180-b89e-da0fd994b886" class="bulleted-list"><li>Block an object version deletion for a specified amount of time</li></ul></li></ul><ul id="f6d79004-22bc-4a25-a1f6-c88d7b17b0ad" class="bulleted-list"><li><strong>Glacier Vault Lock</strong><ul id="030e9b51-cb10-4361-9683-6778d817424b" class="bulleted-list"><li>Adopt a WORM model</li></ul><ul id="686a4a59-fd45-4712-8e6a-d30f651ff787" class="bulleted-list"><li>Lock the policy for future edits(can no longer be changed)</li></ul><ul id="3fc6256d-8614-4982-8abf-47965be53b6a" class="bulleted-list"><li>Helpful for compliance and data retention</li></ul></li></ul><p id="cc1290f5-7fda-49e9-8f7d-06fad99d77a0" class="">
+</p><p id="f49f977f-7c74-4f50-b536-2dd68e8f7f2a" class="">
+</p><p id="92ec689a-37c6-4255-b743-07c117733198" class="">
+</p><p id="076a516c-e91e-44e7-be40-0b686c6fc1c9" class="">
+</p></div></article></body></html>

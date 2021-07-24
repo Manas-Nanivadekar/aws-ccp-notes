@@ -1,0 +1,662 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>EC2 Instance Storage</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c3d9607e-5426-4979-98c5-b18cdee51a51" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">🌀</span></div><h1 class="page-title">EC2 Instance Storage</h1></header><div class="page-body"><h1 id="b7bc64f9-b2ee-4b85-9982-513c910e6e29" class="">What&#x27;s an EBS Volume?</h1><ul id="ba32c260-4161-4188-bc12-35b45ee88216" class="bulleted-list"><li>An EBS(Elastic Block Store) Volume is a network drive you can attach to your instances while they run.</li></ul><ul id="b4a99f3e-cf12-4bf1-b89c-7a068c870ddd" class="bulleted-list"><li>It allows your instances to persist data, even after their termination</li></ul><ul id="568f5620-43c2-4535-b1ba-1c5f76480b2f" class="bulleted-list"><li>They can only be mounted to one instance at a time(at the CCP level)</li></ul><ul id="343f102d-202b-4fe7-949b-804d49aa6dfa" class="bulleted-list"><li>They are bound to a specific availability zone</li></ul><p id="4f6ad7a6-f8a0-4de7-8f52-168b9598592d" class="">
+</p><ul id="0716431b-06b7-49f4-9ec6-197c9934a196" class="bulleted-list"><li>Analogy: Think of ECB as a &quot;network USB stick&quot;</li></ul><ul id="d35b893c-1167-49b4-8f28-00f0a015dd49" class="bulleted-list"><li>Free tier: 30GB of free EBS storage of type General Purpose (SSD) or Magnetic per month</li></ul><p id="8b30e1e1-7fac-43f0-958f-134d763ffe27" class="">
+</p><p id="07c7fee4-23bd-4762-8088-fd9aa18b908d" class="">
+</p><p id="6e3e3342-6b30-432b-bd3f-8f9c046c9360" class="">
+</p><h1 id="db491cee-f994-4cad-9a44-eef17789ee04" class="">EBS Volume</h1><ul id="68d78eaf-1bec-4ba7-94f4-a580a9bd2481" class="bulleted-list"><li>It&#x27;s a network drive (ie not a physical drive)<ul id="10c71879-d8dc-4d74-ac59-35e180081e36" class="bulleted-list"><li>It uses the network to communicate the instance, that means there might be a bit of latency</li></ul><ul id="0afd9f9f-7162-4b21-bd34-a6c0cd5d20a6" class="bulleted-list"><li>It can be detached from an EC2 instance and attached to another one quickly</li></ul></li></ul><ul id="4de15d87-6720-4af4-acc8-f18ea7ab048b" class="bulleted-list"><li>It&#x27;s locked to an AZ<ul id="253d5458-1b0a-448b-8c2c-ae82bacecbe4" class="bulleted-list"><li>An EBS Volume in us-east-1a cannot be attached to us-east-1b</li></ul><ul id="330f7848-2f83-4dcf-9a41-4bbdc8ff1b24" class="bulleted-list"><li>To move a volume across, you first need to snapshot it</li></ul></li></ul><ul id="86342eaa-a427-4d5d-baf3-f64ada7d3a2b" class="bulleted-list"><li>Have a provisioned capacity(size in GBs, and IOPS)<ul id="0b296d23-5dd1-42a2-8f89-8ac99fb7365e" class="bulleted-list"><li>You get billed for all the provisioned capacity </li></ul><ul id="091a948a-01f4-4033-971d-56ea3a2fb339" class="bulleted-list"><li>You can increase the capacity of the drive over time</li></ul></li></ul><figure id="f2298eec-a0ef-4d68-82b8-ee8aa74966e4" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled.png"><img style="width:1132px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled.png"/></a></figure><p id="4a5bfd17-812c-466d-a678-d01c7158071e" class="">
+</p><p id="3a4469b0-2d66-4a3a-a2e8-55abc218892d" class="">
+</p><p id="4d9250b0-6329-4891-8643-2e1dc39c6684" class="">
+</p><h1 id="2242b805-b6e1-4313-b583-8538b1caf65f" class="">EBS Snapshots</h1><ul id="95adb02d-8ab7-47e7-936e-d91b79fd4b12" class="bulleted-list"><li>Make a backup of your EBS volume at a point in time</li></ul><ul id="55e638ef-a0f2-444c-a051-859beabc1744" class="bulleted-list"><li>Not necessary to detach volume to do snapshot, but recommended</li></ul><ul id="dd83da92-e237-4054-942f-51ca8b582b5c" class="bulleted-list"><li>Can copy snapshots across AZ or Region</li></ul><p id="54921efb-be79-4839-9831-777e4d702338" class="">
+</p><p id="66b29ef4-4894-4e0b-8f36-85bcecf7d8bd" class="">
+</p><p id="655ba836-dcad-4de4-8ec5-628b7af76eee" class="">
+</p><h1 id="1d9a3d70-7faf-4022-af15-995f21d96ec3" class="">AMI Overview</h1><ul id="a63da59f-fe07-482d-b488-b91661649157" class="bulleted-list"><li>AMI = Amazon Machine Image</li></ul><ul id="bb5e3c65-dd05-4feb-8dc8-a2d6c5e280be" class="bulleted-list"><li>AMI are a customisation of an EC2 instance<ul id="c05b2981-5680-47a2-b181-d9247dc69a0a" class="bulleted-list"><li>You add your own software, config, OS, monitoring...</li></ul><ul id="e6327c10-da51-4523-9be6-f168ac53facd" class="bulleted-list"><li>Fast boot/config time because all your software is pre-packaged</li></ul></li></ul><ul id="6834e479-f1a1-40e2-b188-95d27c1b7b34" class="bulleted-list"><li>AMI are built for a specific region(and can be copied across regions)</li></ul><ul id="e4b82a4f-bc26-4842-97f7-640ca1e6f878" class="bulleted-list"><li>You can launch EC2 instances from:<ul id="9909cba6-93bc-4c49-a3c5-e70c1006b098" class="bulleted-list"><li>A public AMI: AWS provided</li></ul><ul id="97267d99-d52f-435f-902e-b198789e892e" class="bulleted-list"><li>Your own AMI: You make and maintain them yourself</li></ul><ul id="30315bee-5fe0-4547-9264-0a3d58e36880" class="bulleted-list"><li>An AWS Marketplace AMI: an AMI someone else made(and potentially sells)</li></ul></li></ul><h2 id="05ad81d5-bcf1-42d0-8d0e-ad5000add357" class="">AMI Process(from an EC2 instance)</h2><ul id="94b68fab-a236-4972-960c-3be21b578bea" class="bulleted-list"><li>Start an EC2 instance and customise it </li></ul><ul id="9a8230aa-a452-4133-a3ef-cc012c3f1192" class="bulleted-list"><li>Stop the instance (for data integrity)</li></ul><ul id="89b54c35-2964-4f1e-93c9-017d8e7711f7" class="bulleted-list"><li>Build an AMI</li></ul><ul id="9e2f0238-8a91-4eaa-86e1-dea7f8db6b1e" class="bulleted-list"><li>Launch instances from other AMIs</li></ul><p id="01e5a6a2-355d-46f4-a693-6606bfbc9c9b" class="">
+</p><p id="47f0404a-8ce7-43ac-ab00-40a04877d37c" class="">
+</p><p id="a78842d0-a3d0-47e2-a52d-9cdcdaf3ad1d" class="">
+</p><h1 id="aa901a93-b733-48ea-8036-14d4f53aa8b6" class="">EC2 Image Builder</h1><ul id="9eb051f9-0ee5-425f-b7e7-b6509ee84731" class="bulleted-list"><li>Used to automate the creation of VM or container images</li></ul><ul id="0d82a047-8643-4ed7-a79d-f4be03632a15" class="bulleted-list"><li>Can be ran on a scheduled</li></ul><ul id="56486596-beba-4f45-b5fa-5fa34320f0ec" class="bulleted-list"><li>Free service(pay for the underlying resources)</li></ul><ul id="a13bc4a5-0a94-4679-b22f-7a57925f811c" class="bulleted-list"><li>Flow is in diagram below</li></ul><figure id="f0d89333-017a-4c2c-80d6-e474e2bfab69" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%201.png"><img style="width:1188px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%201.png"/></a></figure><p id="ae59ebb7-650d-4d52-a0de-da576e290730" class="">
+</p><p id="16d0e6e4-9f58-4f5a-91fe-32301a1a53c2" class="">
+</p><p id="07e168a5-a993-4d83-9f21-7311cdb0a8c9" class="">
+</p><h1 id="5b55d779-daf7-4303-836b-c1514760090e" class="">EC2 Instance Store</h1><ul id="b0a2f4d5-3fef-4554-8383-a095c54eccf6" class="bulleted-list"><li>EBS Volume are network drives with good but &quot;limited&quot; performance</li></ul><ul id="dab2b173-203b-467d-9b0b-274f11884f89" class="bulleted-list"><li>If you need <strong>high-performance </strong>hardware disk, use EC2 Instance Store</li></ul><p id="bdfd33ff-3596-4ed6-a694-ca5354c9d6fc" class="">
+</p><ul id="4f352839-cb97-4fb2-8213-41beb24f2af1" class="bulleted-list"><li>Better I/O performance</li></ul><ul id="def355d3-f26b-4f99-8fb4-c9e8493ccaf8" class="bulleted-list"><li>EC2 Instance Store lose their storage if they&#x27;re stopped (aka ephemeral)</li></ul><ul id="d8f156cf-260a-45d2-a62e-c421dc234ddc" class="bulleted-list"><li>Good for buffer / cache/ scratch data/</li></ul><ul id="cfcb3dbe-bc53-43ac-abc5-ee48da4ec586" class="bulleted-list"><li>Risk of data loss if hardware fails</li></ul><ul id="41b37baf-9d33-4b05-8aa4-dc4a54d2967d" class="bulleted-list"><li>Backups and Replication are your responsibility</li></ul><p id="ee2ff4c2-2059-4731-b4ca-a3dc4e59bb3e" class="">
+</p><p id="2b065d2f-d37c-4eaf-8f69-d7ae053ef336" class="">
+</p><p id="444bb4d0-abf2-4620-b357-6e1dbf5eb446" class="">
+</p><h1 id="00fcbec1-d730-439c-b474-3a3ba81dd884" class="">EFS- Elastic File System</h1><ul id="e934bb54-6afe-4699-a428-3ba2f4a82057" class="bulleted-list"><li>Managed NFS(network file system) that can be mounted on 100s of EC2</li></ul><ul id="0db486c0-7809-48e2-893c-683ebdbac2eb" class="bulleted-list"><li>EFS works with Linux EC2 instances in multi-AZ</li></ul><ul id="76d5044d-c51f-4e49-8249-a7324d057af2" class="bulleted-list"><li>Highly available, scalable, expensive, pay per use, no capacity planning </li></ul><figure id="c9fd95be-2217-49a0-826e-946609cb5dbf" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%202.png"><img style="width:1034px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%202.png"/></a></figure><h2 id="720dabf5-70bb-4a17-8d81-57814ae9231b" class="">EBS vs EFS</h2><figure id="a2e4a73c-cd63-489a-8f47-4e4c7bb4aca7" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%203.png"><img style="width:1115px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%203.png"/></a></figure><h2 id="7a77be31-1b86-476f-8a8d-36f965339474" class="">EFS Infrequent Access (EFS-IA)</h2><ul id="a0b13333-39f5-484c-98fc-a930fefa804c" class="bulleted-list"><li>Storage Class that is cost-optimised for files not accessed every day</li></ul><ul id="3b3cdf19-411d-4ff7-8c0d-1571884227b9" class="bulleted-list"><li>Up to 92% lower cost compared to EFS Standard</li></ul><ul id="52398f80-635d-43e5-88e3-deac18b733bb" class="bulleted-list"><li>EFS will automate move your files to EFS-IA based on the last time they were accessed</li></ul><ul id="ba88c2ed-a442-44f5-962f-c1ff346a8148" class="bulleted-list"><li>Enable EFS-IA with a Lifecycle Policy</li></ul><ul id="08ae8bdc-8975-45e7-a2d0-bb9b124ecfe4" class="bulleted-list"><li>Example: Move files that are not accessed for 60 days to EFS-IA</li></ul><ul id="e8aa7c20-db91-4868-8df6-87897ae3bbb1" class="bulleted-list"><li>Transparent to the applications accessing EFS</li></ul><figure id="6d7f34aa-7c01-4085-b769-b771e77f2d77" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%204.png"><img style="width:397px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%204.png"/></a></figure><p id="9589f454-54c4-4a0a-a979-c6f0efca8773" class="">
+</p><p id="8c1ccbb9-9cca-4e33-90cb-5bdcf3605bba" class="">
+</p><p id="05cbfbae-b6f1-40cc-b58b-ae768f390544" class="">
+</p><h1 id="887a8d1b-d125-4707-a85d-517480356779" class="">Amazon FSx for Windows File Server</h1><ul id="1710721b-6774-463b-9e91-f07525d9b69b" class="bulleted-list"><li>A fully manages, highly reliable and scalable Windows Native shared file system</li></ul><ul id="0f588ba7-f6ef-4bbf-9b8c-abaebe87aad7" class="bulleted-list"><li>Built on Windows File Server</li></ul><ul id="954fc278-30cf-418b-8fcc-302169ad9aa1" class="bulleted-list"><li>Supports SMB protocol &amp; Windows NTFS</li></ul><ul id="f1b1c8f7-9535-48f4-b095-bbdb4e0bd9ba" class="bulleted-list"><li>Integrated with Microsoft Active Directory</li></ul><ul id="fbf51732-1168-4d7a-a53e-e3a8a7c2f8f3" class="bulleted-list"><li>Can be accessed from AWS or your on-premise infra</li></ul><figure id="db210a19-83e2-44cc-ae00-fd767dc57f80" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%205.png"><img style="width:543px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%205.png"/></a></figure><p id="a6df3c54-4bf3-4216-8ffd-aa829207dac9" class="">
+</p><p id="91bbfd1c-b7cc-4de5-9dc6-f4719adfe0c5" class="">
+</p><p id="31fb1516-7e1d-475e-97c0-0b84d59a8aaf" class="">
+</p><h1 id="0ef8dd8e-47e3-421a-957e-7b881431c8d3" class="">Amazon FSx for Lustre</h1><ul id="86936fb0-3197-48e6-8061-efb056581fba" class="bulleted-list"><li>A fully managed, high-performance, scalable file storage for <strong>High Performance Computing(HPC)</strong></li></ul><ul id="f03fa2e4-f01a-4c8e-bb8f-d2fd6f0b5927" class="bulleted-list"><li>The name Lustre is derived from &quot;Linux&quot; and &quot;Cluster&quot;</li></ul><ul id="87b15919-d79c-4a6a-a521-26a7fc1d11c9" class="bulleted-list"><li>Machine Learning, Analytics, Video Processing, Financial Modeling...</li></ul><ul id="4f54265e-bc6d-44e2-800b-13ac6ae071f1" class="bulleted-list"><li>Scales up to 100s GB/s, millions of IOPS, sub-ms latency </li></ul><figure id="a23ea9b8-85ad-4e69-86c3-3ef94cd58a6d" class="image"><a href="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%206.png"><img style="width:971px" src="EC2%20Instance%20Storage%20c3d9607e5426497998c5b18cdee51a51/Untitled%206.png"/></a></figure></div></article></body></html>

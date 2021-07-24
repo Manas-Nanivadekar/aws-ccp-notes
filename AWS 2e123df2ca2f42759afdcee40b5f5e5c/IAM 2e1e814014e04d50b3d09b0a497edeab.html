@@ -1,0 +1,663 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>IAM</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e1e8140-14e0-4d50-b3d0-9b0a497edeab" class="page mono"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_vincent_van_gogh_cradle.jpg" style="object-position:center 80%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🎴</span></div><h1 class="page-title">IAM</h1></header><div class="page-body"><blockquote id="26c849d6-a1ce-4049-9bb6-52488065b815" class="">IAM = Identity and Access Management </blockquote><p id="f709c8c8-7c05-48ec-9552-0ffacfdcf724" class="">
+</p><p id="566d2d10-dcb8-43e6-9ea2-b48c34ba6fc8" class="">
+</p><h1 id="0ab4a850-3534-4e67-b4fd-1acfadd8810e" class="">User and Group</h1><ul id="3eba6014-04f4-4538-8e86-67ef921dc83c" class="bulleted-list"><li><strong>Root account</strong> created by default, shouldn&#x27;t be used. </li></ul><ul id="9bedbb9b-c7d3-418d-8b7a-c59c8ba8ffe2" class="bulleted-list"><li><strong>User</strong> are people within your organisation</li></ul><ul id="f6d1d742-d67c-48fa-a88b-e0706a4fb1fc" class="bulleted-list"><li><strong>Groups</strong> only contain user, not other groups.</li></ul><h1 id="eabdfe30-a9cb-416b-a15f-16290bb7ee05" class="">Permissions</h1><ul id="01db86dc-2ed0-4dc0-bf40-be50ae9891e9" class="bulleted-list"><li><strong>Users or Groups</strong> can be assigned JSON documents called policies.</li></ul><ul id="ba68eba4-9795-4ef5-97c2-fb1d41cac688" class="bulleted-list"><li>These policies define the <strong>permissions </strong>of the users</li></ul><ul id="371b468e-4dc2-4faa-855e-d8028ed4d2d5" class="bulleted-list"><li>In AWS you apply the <strong>least privilege principle</strong>: don&#x27;t give more permission than the user needs </li></ul><p id="91d799f8-770d-4c32-a589-b71c7b2de4a4" class="">
+</p><p id="3ca1195a-b1e4-41df-9a59-f4a2a8188289" class="">
+</p><p id="c920d599-006b-4ac7-a69f-77f7434aca71" class="">
+</p><h1 id="905feef7-c68e-47db-bc20-4c25a617da66" class="">IAM Policies Inheritance</h1><figure id="1c928de1-0d33-4c30-96a6-0c5474b8a5a0" class="image"><a href="IAM%202e1e814014e04d50b3d09b0a497edeab/Untitled.png"><img style="width:1164px" src="IAM%202e1e814014e04d50b3d09b0a497edeab/Untitled.png"/></a></figure><h1 id="f8b36b03-17eb-4c83-95d9-6a06c6569079" class="">Policies Structure</h1><h2 id="d5fce1cc-7267-4125-9212-5998bdc1fb7e" class="">Consists Of </h2><ul id="f6578a35-6ab5-4355-82ad-cfcdd479570b" class="bulleted-list"><li>Version</li></ul><ul id="ca2ee011-7c73-4f5b-9660-af7a6da829b3" class="bulleted-list"><li>Id(Optional)</li></ul><ul id="6ad418c8-fdfa-4153-86ea-eb07ff7115f1" class="bulleted-list"><li>Statement</li></ul><h2 id="6aee07fe-fdd5-4bc5-beb2-6c910e3951cf" class="">Statements consists of </h2><ul id="c5c78846-6881-4ab7-b58b-3662e67dbb6d" class="bulleted-list"><li><strong>Sid: </strong>an identifier for the statement(optional)</li></ul><ul id="f0578d4d-f1f4-4921-833d-0053f7b2c999" class="bulleted-list"><li><strong>Effect</strong>: Whether the statement allows or denies access</li></ul><ul id="bca8eb81-21e1-4098-a47f-2521066b65d5" class="bulleted-list"><li><strong>Principal</strong>: account/user/role to which this policy applies.</li></ul><ul id="df54b2ed-f19e-48a1-998c-a734eafecd42" class="bulleted-list"><li><strong>Action</strong>: List of actions this policy allows or denies.</li></ul><ul id="d0d88cc9-26de-4da1-8905-1b5104e17523" class="bulleted-list"><li><strong>Resources</strong>: List of resources to which the action is in effect</li></ul><ul id="54d5bfcf-3d8c-4aac-85b3-1537c4dc8786" class="bulleted-list"><li><strong>Condition</strong>(Optional)</li></ul><p id="44473dd1-0f1c-41b2-a4e6-358189557c6d" class="">
+</p><p id="6b53f641-5e7e-41e0-9b5b-a90b268e7b94" class="">
+</p><h2 id="8b576996-0e8c-4dee-ba6f-50bb872e3284" class="">Policy Creation </h2><p id="f9453b46-0a94-45fe-bb99-3b23ef214ad1" class="">You can always choose to use pre-defined policies, but if you want to create your own policies there are two ways to do so.</p><h3 id="7f64f009-b8f2-4ee9-b91f-220e23f050fd" class="">Visual Editor</h3><ul id="802fc822-ebc9-474a-a321-7731bbc4dd44" class="bulleted-list"><li>GUI based selection</li></ul><h3 id="ba0f116d-eb60-4d79-ae73-cfcb3b73f7c7" class="">JSON</h3><ul id="2623cf44-d59a-452a-a457-dabe74ab3d9c" class="bulleted-list"><li>Need to write policies by yourself in a JSON format.</li></ul><p id="fc03331f-7752-43e2-8044-2cbb11bda62d" class="">
+</p><p id="84d0711e-abda-4682-8e8a-e13be74bca87" class="">
+</p><p id="f9f4fd36-6660-44f2-81a7-4d6d7af13915" class="">
+</p><h1 id="61c509fe-d1e5-4a05-ab28-fcafe53e7b82" class="">Password Policies</h1><h2 id="08dfcf46-d950-44f6-a96b-c922ae7aa103" class="">Setting the Policies by yourself</h2><ul id="609c8245-c9bd-4379-98d7-b39afb5ac4fd" class="bulleted-list"><li>One can set policies such as, &quot;password has to x char long&quot;, etc.</li></ul><h2 id="10836e55-b68c-4821-8773-c9a203849256" class="">Multi Factor Authentication - MFA (recommended)</h2><ul id="95163c84-f67f-4c83-a1c8-137e954b1da7" class="bulleted-list"><li>MFA = Password <em>you </em>know + security device <em>you </em>own.</li></ul><ul id="dcd544f9-e1cd-4577-8fb1-bcdef6c51605" class="bulleted-list"><li>The benefit of MFA is that even if your password is stolen or hacked, the account is not compromised.</li></ul><h2 id="ee567b39-1764-4aea-85d6-740c72228b69" class="">MFA devices options in AWS</h2><h3 id="adea42d1-2604-43ce-9244-7db375a7d7ab" class="">Virtual MFA device</h3><ul id="ca6ca028-d4d4-4b9a-8991-7674dac1bd41" class="bulleted-list"><li>Google Authenticator</li></ul><ul id="d8fe9151-3ffb-43fd-8e07-06628de4d8ea" class="bulleted-list"><li>Authy</li></ul><h3 id="a7af538d-e082-4dc7-a5f2-8f6e0db545f1" class="">Universal 2nd Factor(U2F) Security Key</h3><ul id="f7e88aae-da68-4049-8e7b-37031f58efcb" class="bulleted-list"><li>YubiKey (3rd party)</li></ul><h3 id="7ca629ca-ecaf-46c3-b0c7-5569f1a2606a" class="">Hardware Key Fob MFA Device</h3><ul id="e4a57831-8c95-4362-b0b0-8767f00e9993" class="bulleted-list"><li>Gemalto (3rd party)</li></ul><h3 id="11862a3a-b8ca-4a8c-9c2a-42ae74e85a37" class="">Hardware Key Fob MFA Device for AWS GovCloud(US)</h3><ul id="aacec76c-6d51-48fb-9665-c7c558cbdcf1" class="bulleted-list"><li>SurePassId (3rd Party)</li></ul><p id="1c4077bc-d007-4a7a-bc26-a4893921ee36" class="">
+</p><p id="781d3ec8-bb09-422b-83cf-46d1bd48f942" class="">
+</p><p id="f97278ac-8492-45fc-be48-1ae81bad3e63" class="">
+</p><h2 id="4029269a-1fc8-42eb-a169-ff1ff93f2935" class="">Cli configuration</h2><pre id="10519ad1-ec83-49c9-a70e-f6c92e00f5e3" class="code"><code>aws configure</code></pre><p id="d0d9539a-f529-4ff2-a01e-d3af516e8f35" class="">Follow the below steps to setup your cli </p><ul id="68d35a51-bf8f-4140-be5d-dad793728aa1" class="bulleted-list"><li>Enter Secret Key</li></ul><ul id="7a65139f-ccb5-45e5-8043-3273056346b8" class="bulleted-list"><li>Default Region Code</li></ul><ul id="41fa2165-372f-4cbe-9ea3-dca1df40bc28" class="bulleted-list"><li>Press Enter</li></ul><ul id="8b8c7abc-1576-4ef9-a25b-8b4dd9802dcb" class="bulleted-list"><li>Enter your Access Key ID</li></ul><p id="639ed0ef-6e78-49e1-880a-9b70f3e6ce0c" class=""><strong>You need the relevant permissions in order to use cli</strong></p><p id="b08238d9-0da9-4f96-9e48-9237ff89a972" class="">
+</p><p id="1cf5fd9d-9a5e-4564-a2c0-e5e8cdfcf30c" class="">
+</p><p id="45bf622f-a0f4-4450-b6f1-dd1374f9c6cb" class="">
+</p><h1 id="bbdbacea-18f7-41d5-8195-8cb407783d73" class="">Cloud Shell</h1><ul id="f08fd466-3ddf-497c-ac1f-74cbd6f71777" class="bulleted-list"><li>Cloud shell is a free to use cloud terminal that helps you to AWS CLI.</li></ul><ul id="25788660-6f29-45e1-a20f-1f939c76e9fa" class="bulleted-list"><li>The data is persisted in the environment</li></ul><ul id="5919caf9-51a6-4176-96cc-48821f15d7aa" class="bulleted-list"><li>One can customise the terminal the way they want</li></ul><p id="516bf547-f8fa-4417-a91c-cae6e2ca77d4" class="">
+</p><p id="95886018-aaf4-4072-9ef9-c26c83f1d5a3" class="">
+</p><p id="c92ec957-4b35-4b04-88a3-87161c5a1942" class="">
+</p><h1 id="97b5ee5d-df5f-438d-8e10-1753473bd6a3" class="">IAM Roles for Service</h1><ul id="4347d88d-cb37-4ddd-830f-e7877653643d" class="bulleted-list"><li>Some AWS service will need to perform action on your behalf</li></ul><ul id="c4ff1f27-3754-4074-94c5-a7f4bc1b97e1" class="bulleted-list"><li>To do so, we will assign <strong>permissions</strong> to AWS services with <strong>IAM </strong>Roles.</li></ul><h2 id="96dc4de6-a08b-4ddc-8ceb-c23b93e1d559" class="">Common roles:</h2><ul id="6151e2ac-74e3-42a6-a5af-c00f877be07f" class="bulleted-list"><li>EC2 instance Roles</li></ul><ul id="d6c49278-877b-4ee6-9fbd-9b1be22e8011" class="bulleted-list"><li>Lambda Function Roles</li></ul><ul id="f06d9a85-c6e4-4c7c-8ec7-8a12180722b6" class="bulleted-list"><li>Roles for CloudFormation</li></ul><h2 id="c766e191-361c-4f67-9723-654191425978" class="">Setting Roles</h2><p id="075d0f29-fa49-4165-9bf3-e7407d26a35f" class="">There are two ways to set IAM roles.</p><ol id="c5b942cf-2452-45d9-be2a-03d9d52b3cdd" class="numbered-list" start="1"><li>Use the pre-defined roles</li></ol><ol id="c325dbfe-c576-4df6-b145-c1ccb0ac7440" class="numbered-list" start="2"><li>Create your own</li></ol><p id="44aa2e7b-a290-4be7-89f5-b806af9e0c5a" class="">
+</p><p id="78f2a1db-2c91-440b-9ec8-5b6758fcdf17" class="">
+</p><p id="fe24135e-cd48-4dc3-bab5-0e15ab81ffd0" class="">
+</p><p id="bc4b5a47-cf3a-4188-8506-03ed3fe2cabe" class="">
+</p><h1 id="4876aeac-f622-491c-bdbe-bf097a957248" class="">IAM Security Tool</h1><ul id="a275f39e-9b47-4423-85c1-430398e5d188" class="bulleted-list"><li>IAM Credentials Report(account-level)</li></ul><ul id="7d2271ed-0ae2-4d58-82aa-b2cd4af121f8" class="bulleted-list"><li>IAM Access Advisor(user-level)</li></ul><p id="91b1cfe6-dc8e-4da7-a390-542a9881ea6e" class="">
+</p><p id="acf4c512-3b2a-47f9-968c-1b815335cd5b" class="">
+</p><p id="2f1244c7-9418-4ffd-ade1-5dbc41b6789c" class="">
+</p><p id="83966f38-358d-495d-aa26-c584651105ce" class="">
+</p><h1 id="c6b6d6ff-70d6-4f02-a52d-98e97921024c" class="">IAM Guidelines &amp; Best Practices</h1><ul id="d76e7393-dd00-4a05-b05d-5aa7224bfcf3" class="bulleted-list"><li>Don&#x27;t use the root account except for AWS account setup</li></ul><ul id="b04a25f0-0fb1-4ff8-8cd2-3f704aead1c7" class="bulleted-list"><li>One physical user = One AWS user</li></ul><ul id="8b131cca-4013-4b6f-b6dc-ebed807b5f14" class="bulleted-list"><li>Assign users to groups and assign permissions to groups</li></ul><ul id="95b31ebb-1ee2-41f8-aedf-2d0a9a94125a" class="bulleted-list"><li>Create a strong password policy</li></ul><ul id="17d65263-105a-4015-a0f8-ada38cc66b37" class="bulleted-list"><li>Use and enforce the use of MFA</li></ul><ul id="bd3bc861-d1fa-449f-a7f1-dc8c4d77784f" class="bulleted-list"><li>Create and use <strong>Roles </strong>for giving permissions to AWS services</li></ul><ul id="cea5695d-766e-4c10-89d5-0372f5cf0416" class="bulleted-list"><li>Use Access Keys for Programmatic Access(CLI/SDK)</li></ul><ul id="24032523-b07f-4fe0-a2ef-00e52cad691d" class="bulleted-list"><li>Audit permissions of your account with the IAM Credential Report</li></ul><ul id="ad0c2a41-53eb-4e0c-82ac-c5a9eb48dad9" class="bulleted-list"><li>Never Share IAM users &amp; Access Keys</li></ul></div></article></body></html>

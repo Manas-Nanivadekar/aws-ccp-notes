@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Databases &amp; Analytics</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d6b262fe-5db2-4473-9c36-f11698a2ab63" class="page mono"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/woodcuts_2.jpg" style="object-position:center 19.999999999999996%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🖲️</span></div><h1 class="page-title">Databases &amp; Analytics</h1></header><div class="page-body"><h1 id="58ae3e56-f354-4f75-88ec-29fe3d8d650c" class="">Introduction</h1><ul id="2bc0c399-0ca9-499a-9acf-eb2af72993ee" class="bulleted-list"><li>Storing data on disk (EFS, EBS, EC2 Instance Store, S3) can have it&#x27;s limits</li></ul><ul id="2c36ee55-4c3e-4be8-8d05-84a3e51d770e" class="bulleted-list"><li>Sometimes, you want to store data in a db</li></ul><ul id="b3bda721-81a8-4dda-a927-4e3e80a07803" class="bulleted-list"><li>You can structure the data</li></ul><ul id="9e89ac18-08ed-45b1-bb0a-3eeff17acb31" class="bulleted-list"><li>You build indexed to efficiently query/search through the data</li></ul><ul id="568940af-af3a-4e1e-a788-135da1c0546b" class="bulleted-list"><li>You define relationships between your datasets</li></ul><p id="c2670baf-d922-4e95-bfa9-b728af90e757" class="">
+</p><p id="8255940f-01c7-4573-a675-c01edab634a3" class="">
+</p><p id="209df431-8930-4b48-8ed2-daaaf7b15da9" class="">
+</p><h1 id="977023a8-4730-4d27-834a-25e5be2ceb98" class="">Relational DB</h1><ul id="8996c34b-cef4-44e8-853e-19147d160751" class="bulleted-list"><li>Looks just like Excel Spreadsheets, with links between them!</li></ul><ul id="513abc18-1b87-42c1-aa1c-4d431b85d455" class="bulleted-list"><li>Can use the SQL language to perform queries and lookups</li></ul><figure id="21e3a507-582d-41e9-9c7b-13e955224298" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled.png"><img style="width:1092px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled.png"/></a></figure><p id="957efcec-6824-48a0-917f-71fc934bab09" class="">
+</p><p id="19942387-2483-44da-895b-53a2a4aba874" class="">
+</p><p id="0be9fc73-34db-4dd8-a031-33504e54b5a9" class="">
+</p><h1 id="99d3f158-867c-4235-8f0b-23a9ce241beb" class="">NoSQL DB</h1><ul id="6995566e-2a71-4c83-b51c-9a140e34b857" class="bulleted-list"><li>NoSQL = non-SQL = non relational db</li></ul><ul id="d2995286-eb1e-4e18-b7f6-bf7d7eac8ee1" class="bulleted-list"><li>NoSQL db are purpose built for specific data models and have flexible schema&#x27;s for building modern application.</li></ul><ul id="cabf8fac-ba44-48e6-a89a-db5184e976db" class="bulleted-list"><li>Benefits:<ul id="3d3717a0-f28e-4210-88f2-8891a1cb52f7" class="bulleted-list"><li>Flexibility: Easy to evolve data model</li></ul><ul id="79f4e46a-cdcf-4bba-a21a-01a3369ae253" class="bulleted-list"><li>Scalability: designed to scale-out by using distributed clusters</li></ul><ul id="30a3ce2f-47fa-4235-9f7e-16fc08cae9df" class="bulleted-list"><li>High-performance: optimised for a specific data model</li></ul><ul id="dc5eaa1e-5deb-4c54-9ad3-f6307069b2e8" class="bulleted-list"><li>Highly functional: types optimised for the data model</li></ul></li></ul><p id="628d85a6-51e0-42e7-bce4-573bc1e98f1f" class="">
+</p><p id="1a5d821e-1984-4a1b-b8be-41739ffee4a2" class="">
+</p><p id="a47563f6-5791-4e05-9553-614fb1fadfb7" class="">
+</p><h1 id="79737a5b-ca31-4cc3-a13d-afadb257dc05" class="">DB&#x27;s &amp; Shared Responsibility on AWS</h1><ul id="fbbb6f45-4ba9-4ac6-b94c-cbba92e0eeb8" class="bulleted-list"><li>AWS offers use to manage different db&#x27;s</li></ul><ul id="e0fa9d13-d2bc-415d-b84d-3b07c6fca7fc" class="bulleted-list"><li>Benefits include:<ul id="e0c96e73-cf52-47a4-bd35-7d28d1da9ad8" class="bulleted-list"><li>Quick Provisioning, High Availability, Vertical and Horizontal Scaling</li></ul><ul id="367ca3e6-36b2-42d3-85b4-822a6360aaf9" class="bulleted-list"><li>Automated Backup &amp; Restore, Operations, Upgrades</li></ul><ul id="8e969cd9-f7a4-45b6-b809-5534d6359c58" class="bulleted-list"><li>OS Patching is handled by AWS</li></ul><ul id="d583ae44-4f62-422c-bb8e-5a32f6b59981" class="bulleted-list"><li>Monitoring, alerting</li></ul><p id="be73f7a6-2bdd-40c1-a503-fa60d2749e7e" class="">
+</p></li></ul><ul id="4e7f58aa-dfad-4a9f-877d-51a2cbea6063" class="bulleted-list"><li>Note: many db technologies can be ran on EC2, but one needs to configure everything from scratch.</li></ul><p id="ac219c80-6bcd-48e3-9a7d-cd529d62128c" class="">
+</p><p id="a5772fdf-5882-4b74-aa75-43b0dcadf2a2" class="">
+</p><p id="e18d7171-7b60-4934-9373-fa457fea8035" class="">
+</p><h1 id="f9494705-4520-4ef7-98ef-cd8ac7a74f7b" class="">AWS RDS</h1><ul id="e9e801fc-d4d0-4b55-ad9a-eb5383510d03" class="bulleted-list"><li>RDS stands for Relational DB Service</li></ul><ul id="f419848f-6215-44ce-9232-491fd11f9375" class="bulleted-list"><li>It&#x27;s a managed DB service for DB use SQL as a query language</li></ul><ul id="57ec0b54-8506-4a6f-b07c-f975486701de" class="bulleted-list"><li>It allows you to create db&#x27;s in the cloud that are managed by AWS:<ul id="e2f76dbe-aee0-4c6b-939b-0c046ac5a1c9" class="bulleted-list"><li>Postgres</li></ul><ul id="266ac691-5f5d-4de4-8dde-81dc7a90c165" class="bulleted-list"><li>MySQL</li></ul><ul id="1a9d34ab-46e8-4348-966c-39deecda3b8a" class="bulleted-list"><li>MariaDB</li></ul><ul id="5aeb7600-445b-47c9-b0e0-e70f9886f54d" class="bulleted-list"><li>Oracle</li></ul><ul id="b07173d4-264e-4c5e-bc3a-eaf1ce74d98c" class="bulleted-list"><li>Aurora(AWS Proprietary DB)</li></ul></li></ul><h2 id="736d3d40-fbb7-493c-9e92-2e2156a66168" class="">Advantage over using RDS versus deploying DB on EC2 </h2><ul id="3c0d7919-b38e-49fb-b498-747ec215896e" class="bulleted-list"><li>RDS is a managed service:<ul id="56f529b4-f31d-45ed-853c-3ee643a6aaa6" class="bulleted-list"><li>Automated provisioning, OS patching</li></ul><ul id="6e2cc892-2b53-4ca1-9218-3c75530b24c7" class="bulleted-list"><li>backups and restore to specific timestamp</li></ul><ul id="a9e3da7f-70fb-4938-a2ac-218a32e02ac9" class="bulleted-list"><li>Monitoring dashboards</li></ul><ul id="5f75a723-b4ad-49b0-b412-3b1632436222" class="bulleted-list"><li>Read replicas for improved read performance</li></ul><ul id="16e08619-3b2f-4b00-bde7-a40a172825b3" class="bulleted-list"><li>Multi AZ setup for DR</li></ul><ul id="8ab8ab7b-5820-4bc8-9bca-7a567a2b0034" class="bulleted-list"><li>Maintenance windows for upgrades</li></ul><ul id="723d3007-e4a7-4352-9eaa-0053b13d4131" class="bulleted-list"><li>Scaling capability</li></ul><ul id="673c3bbe-6d93-4f63-b850-b20b5c72b294" class="bulleted-list"><li>Storage backed by EBS</li></ul></li></ul><ul id="c55fd9ce-5154-4814-8fcd-b4d1b78c7bf0" class="bulleted-list"><li>You can&#x27;t SSH into your instances</li></ul><h2 id="d8c5a92f-69e9-4f59-a0cd-56568ca8c596" class="">RDS Solution Architecture</h2><figure id="b6cff9ed-969c-480c-91d5-952eddabeae4" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%201.png"><img style="width:1054px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%201.png"/></a></figure><h2 id="749d88a8-d9d8-447b-bd65-c0944c10e5c0" class="">Amazon Aurora</h2><ul id="4e93bd25-6853-4167-829b-fde8a65e7dce" class="bulleted-list"><li>Aurora is a proprietary technology from AWS (not open sourced)</li></ul><ul id="421ff8fb-87db-494c-9bb0-71f57864f1d8" class="bulleted-list"><li>PostgreSQL and MySQL are both supported as Aurora DB</li></ul><ul id="264a539b-ed19-4595-aa96-0a847d7354d3" class="bulleted-list"><li>Aurora is &quot;AWS&quot; cloud optimised and claims 5x performance improvement over MySQL on RDS, over 3x performance of Postgres on RDS</li></ul><ul id="3806cc1c-79be-4ec6-be81-f1a74f331f62" class="bulleted-list"><li>Aurora storage automatically grows in increments of 10GB, upto 64TB.</li></ul><ul id="c8c92a12-d4f2-4fca-bbc5-c8f551614f7e" class="bulleted-list"><li>Aurora costs more than RDS(20% more) - but is more efficient </li></ul><ul id="de04d654-279f-4fd5-825a-0377d1f072aa" class="bulleted-list"><li>Not in the free tier</li></ul><p id="cd3c4908-0a27-4b61-bfc3-3164158442c8" class="">
+</p><p id="455074d7-b1aa-46c0-a818-40a30da4b795" class="">
+</p><p id="54c8f4e3-dc42-4fc7-985d-c9e27650b96c" class="">
+</p><h1 id="9aca1fa0-0c0e-4731-b983-dadbeb068ec4" class="">Deployment (Read Replicas, Multi-AZ, Multi-Region)</h1><h2 id="dca14d33-dcfa-45d4-8b9b-dcea52c3f393" class="">Read Replicas</h2><ul id="8988bbcf-79b9-4147-b031-28c2e1b6fda0" class="bulleted-list"><li>Scale the read workload of your DB</li></ul><ul id="418e28f4-9a22-457d-95ff-b061463550dc" class="bulleted-list"><li>Can create up to 5 Read Replicas</li></ul><ul id="71680810-7008-4198-aec4-363ec03d9166" class="bulleted-list"><li>Data is only written to the main DB</li></ul><figure id="5310e7b9-e324-41ee-acd0-af33050f9ece" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%202.png"><img style="width:433px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%202.png"/></a></figure><h2 id="d73f19ee-5bce-474e-aea5-6caa1cf659c4" class="">Multi-AZ</h2><ul id="9efdf3bf-ed93-48dc-89f6-7c56841c794b" class="bulleted-list"><li>Failover in case of AZ outage (high availability)</li></ul><ul id="58d81ffc-bc8c-4cca-aab0-dd7d718316fb" class="bulleted-list"><li>Data is only read/written to the main db</li></ul><ul id="b11189c2-f4ea-478c-9f3e-6564c53c18a9" class="bulleted-list"><li>Can only have 1 AZ as failover</li></ul><figure id="7dda0f75-1120-4c18-a3e0-8014d0635475" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%203.png"><img style="width:504px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%203.png"/></a></figure><h2 id="2d34cd12-3949-4e9e-96ea-bcb53164f0dc" class="">Multi-Region</h2><ul id="c109fe2a-e326-48ef-a0fe-262653c9e2bf" class="bulleted-list"><li>Disaster Recovery in case of region issue</li></ul><ul id="b79c5018-203f-4fb8-a9f5-dace1aac092a" class="bulleted-list"><li>Local performance for global reads</li></ul><ul id="90c2f2a3-197c-4865-89f8-1ec904cf2532" class="bulleted-list"><li>Replication cost</li></ul><figure id="88b4e8bb-f6bc-46d7-8e41-5f3a67a516a9" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%204.png"><img style="width:1151px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%204.png"/></a></figure><p id="37ab7fbc-d7da-40e9-940a-fcccd1282fea" class="">
+</p><p id="79f85a76-74a2-498e-9e0c-a34f04ad63e2" class="">
+</p><p id="a7270d32-0269-4e0a-8234-5e35427a682b" class="">
+</p><h1 id="eaa0f633-76b9-4569-948e-5831f372d6cb" class="">Amazon ElasticCache Overview</h1><ul id="ff646607-02a7-45ea-81fb-f24b0f7fe1e2" class="bulleted-list"><li>The same way RDS is to get managed Relational DB...</li></ul><ul id="68991795-1e91-4597-a0e2-fd02d0310524" class="bulleted-list"><li>ElasticCache is to get managed Redis or Memcached</li></ul><ul id="c58c0c39-ba87-4316-8ea5-cdd05620fcb2" class="bulleted-list"><li>Caches are in-memory db&#x27;s with high performance, low latency</li></ul><ul id="94553fb3-233c-4843-a7c5-4c2439a8f4ab" class="bulleted-list"><li>Helps reduce load off db for read intensive workloads</li></ul><ul id="0eabdd15-3fd7-4249-a53f-81af25ec06c6" class="bulleted-list"><li>AWS takes care of OS maintenance/patching, optimisation, setup, configuration, monitoring, failure recovery and backups</li></ul><h2 id="7643911b-8d13-4e71-9a29-26db3afd329b" class="">Solution Architecture - Cache</h2><figure id="865a9c13-5395-4ee5-8d26-9a81c14bfcb2" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%205.png"><img style="width:1023px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%205.png"/></a></figure><p id="e2e483fe-b1d4-4d26-8aea-7d98b181b028" class="">
+</p><p id="eb8d98b0-6d7a-49d1-91c0-a02cd64859c2" class="">
+</p><p id="e3a8fc81-c932-4067-890d-491415e3afef" class="">
+</p><h1 id="49fbd8aa-de57-423f-9a78-bcfbfc30808e" class="">DynamoDB</h1><ul id="b4ab704d-940f-46fb-a8c6-5b67ae4e01cc" class="bulleted-list"><li>Fully managed highly available with replication across 3 AZ</li></ul><ul id="513e355f-96c7-4d7f-8788-eeb4c9883873" class="bulleted-list"><li>NoSQL db - not a relational db</li></ul><ul id="8dbc3bf6-9d8e-4331-b1f2-97d72cbf7d53" class="bulleted-list"><li>Scales to massive workloads, distributed &quot;serverless&quot;db</li></ul><ul id="ca7b2410-82ca-450f-926d-b44cac5f1879" class="bulleted-list"><li>Millions of requests per second, trillions of rows, 100s of TB storage</li></ul><ul id="65f979e6-6245-4ce3-a23a-dfb203155726" class="bulleted-list"><li>Fast and consistent in performance</li></ul><ul id="6eb34b28-c04e-453e-b2c2-d19df1561937" class="bulleted-list"><li>Single-digit millisecond latency - low latency retrieval</li></ul><ul id="084b847f-58bb-4272-bfd4-01d1713d27c2" class="bulleted-list"><li>Integrated with IAM for security, auth and administraiton</li></ul><ul id="e942d3eb-f924-49b7-8fa5-9899cb83c7d4" class="bulleted-list"><li>Low cost and auto scaling capabilities</li></ul><h2 id="553127d3-93fb-478b-859b-0b1c20b022ae" class="">DynamoDB Accelerator - DAX</h2><ul id="ca7a73b2-8f90-4d58-bd53-2f0082654db5" class="bulleted-list"><li>Fully managed in-memory cache for DynamoDB</li></ul><ul id="c7f5fed0-f4cd-4e2c-87e4-b0289bcd6641" class="bulleted-list"><li>10x performance improvement - single-digit millisecond latency to microseconds latency when accessing your DynamoDB tables</li></ul><ul id="aabb2d1d-c124-4962-921b-1783004023ac" class="bulleted-list"><li>Secure, highly scalable &amp; highly available</li></ul><ul id="aa75c8f5-cea3-476e-a426-f45fc7acd76a" class="bulleted-list"><li>Difference with ElasticCache at the CPP level: DAX is only used for and is integrated with DynamoDB, while ElasticCache can be used for other db&#x27;s</li></ul><figure id="9d81e02d-8485-4f1f-ae92-e50a5c379de0" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%206.png"><img style="width:499px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%206.png"/></a></figure><p id="e6a1a8d0-704e-4555-8aba-eabe74dbdc86" class="">
+</p><p id="bb072648-7128-4ff4-be89-fd8ba0fb3a87" class="">
+</p><p id="7f9bb5f9-8d0e-4b80-beea-b0a559d70318" class="">
+</p><h1 id="6cae3ec4-f1fe-4718-a454-ad492da2f29c" class="">Redshift Overview</h1><ul id="162ffb55-8979-4af9-bad2-efe04a5455bd" class="bulleted-list"><li>Redshift is based on PostgreSQL, but it&#x27;s not used for OLTP</li></ul><ul id="dbdefdaa-99b2-4ef2-9799-df6e1b59bc12" class="bulleted-list"><li>It&#x27;s OLAP - online analytical processing(analytics and data warehousing)</li></ul><ul id="feee9f46-f02f-4ea4-b129-f675933a3f58" class="bulleted-list"><li>Load data once every hour, not every second</li></ul><ul id="ae51fe71-b53f-4b76-8970-1e377a829a39" class="bulleted-list"><li>10x better performance that other data warehouses, scale to PBs of data</li></ul><ul id="ae6f7525-ac23-461b-bd87-918b64391814" class="bulleted-list"><li>Columnar storage of data (instead of row based)</li></ul><ul id="176af09e-1f93-4613-be4c-bec1680dfc36" class="bulleted-list"><li>Massively Parallel Query Execution(MPP), highly available</li></ul><ul id="fd68260e-bd59-473f-9f6f-1da098cd7739" class="bulleted-list"><li>Pay as you go based on the instance provisioned </li></ul><ul id="b3ecb8e8-cabc-4d22-92fa-681a5f93f07a" class="bulleted-list"><li>Has a SQL interface for performing the queries</li></ul><ul id="c650ec3c-c2ca-42ff-bcac-d2c2ff29d9aa" class="bulleted-list"><li>BI tools such as AWS Quicksight or Tableau integrate with it</li></ul><p id="86775149-2aeb-46f9-87d2-b441833b5717" class="">
+</p><p id="0b05e4d2-167d-4ec7-b3a8-fc5ae070a011" class="">
+</p><p id="d4492949-cf81-4705-b795-125faddbd8aa" class="">
+</p><h1 id="c9487abc-fd47-4f42-9b3d-f78c376f52f7" class="">Amazon EMR</h1><ul id="0f508ee5-7cc8-44f6-b33f-4ba9c2c0a72f" class="bulleted-list"><li>EMR stands for &quot;Elastic MapReduce&quot;</li></ul><ul id="806e6543-c5f1-4cba-8f17-0ea478c9cd06" class="bulleted-list"><li>EMR helps creating Hadoop cluster (Big Data) to analyse and process vast amount of data</li></ul><ul id="16b551d6-b7a2-4f7a-983a-fb71bfe471e6" class="bulleted-list"><li>The cluster can be made of hundreds of EC2 instances</li></ul><ul id="81e2190b-a6c0-4cb5-b0b2-822d1aebaece" class="bulleted-list"><li>Also supports Apache Spark, HBase, Presto, Flink...</li></ul><p id="a23435a2-03a3-47d5-9603-b6b03e1aec66" class="">
+</p><p id="b0084d15-d99f-40a1-a53d-305c8bebbf41" class="">
+</p><p id="d362660f-72c2-438b-ae1f-739574e0cfd8" class="">
+</p><h1 id="81959ed9-3544-441f-b516-aa02101f344c" class="">Athena</h1><ul id="ba02bfe8-1a47-4571-a2ba-0ae9f39c32ea" class="bulleted-list"><li>Fully serverless db with SQL capabilities</li></ul><ul id="ddfc7202-bd10-469f-b85b-d72b6c6e185b" class="bulleted-list"><li>Used to query data in S3</li></ul><ul id="4d9aa2b1-be9a-4a0a-a478-90f19b39851e" class="bulleted-list"><li>Pay per query </li></ul><ul id="d0830428-6072-4f99-a3af-a4e5d330901f" class="bulleted-list"><li>Output results back to S3</li></ul><ul id="4cfe1e99-1dc4-4e79-85f1-3d92f8278bbf" class="bulleted-list"><li>Secured through IAM</li></ul><ul id="066a32a7-d732-4058-88f1-d73b035cfa79" class="bulleted-list"><li>Use Case: one-time SQL queries, serverless queries on S3, log analytics</li></ul><p id="549f2eb5-fd1e-4092-bb96-128c4423557f" class="">
+</p><p id="550eef2d-59c8-4379-ac97-530cb75d2d32" class="">
+</p><p id="6585a8c2-cb2c-45e0-94ae-8742b5d6f81e" class="">
+</p><h1 id="dbec56c0-e715-4852-a345-90e8a90dea28" class="">Amazon QuickSight</h1><ul id="7b991741-eb58-4328-b48a-e4c3b4eb6c75" class="bulleted-list"><li>Serverless ML-powered business intelligence service to create interactive dashboards</li></ul><ul id="b2fdd45e-368b-45c0-9114-fd7fa0dd2d60" class="bulleted-list"><li>Fast, automatically, scalable, embeddable, with per-session pricing</li></ul><ul id="cbb691f0-fdc7-4a2c-a028-be5ee77e3094" class="bulleted-list"><li>Use Cases:<ul id="e22bf5de-f50e-48bb-8438-e76a389488b0" class="bulleted-list"><li>Business analytics</li></ul><ul id="9200c708-8649-4a04-88f6-980b47d985cf" class="bulleted-list"><li>Building visualisations</li></ul><ul id="e1f3d83a-08a5-469b-bf32-879ac90f2744" class="bulleted-list"><li>Perform ad-hoc analysis</li></ul><ul id="edb0e924-f23b-4c90-9ace-4409d7349b31" class="bulleted-list"><li>Get business insights using data</li></ul></li></ul><ul id="6e680c30-bc88-4948-bad9-0d843618adbb" class="bulleted-list"><li>Integrated with RDS, Aurora, Athena, Redshift, etc...</li></ul><p id="04e50aa8-0770-44ea-bd3e-0eb08f5a38b1" class="">
+</p><p id="d0528dff-6a58-4434-8218-b03672004dcf" class="">
+</p><p id="cdf38b2a-8a36-4451-8bf1-628141bb12fd" class="">
+</p><h1 id="94d3e1fd-76fb-455d-aeb0-92330f99880a" class="">DocumentDB</h1><ul id="972b6651-8415-4ecf-9808-c4ef7aac16b9" class="bulleted-list"><li>Aurora is an &quot;AWS-implementation&quot; of PostgreSQL/MySQL</li></ul><ul id="06a1c97b-70e7-4caf-8430-f828fdb25b63" class="bulleted-list"><li>DocumentDB is the same for MongoDB(wich is a NoSQL db)</li></ul><ul id="00abea50-09e0-4aac-88f4-24d7808318ef" class="bulleted-list"><li>MongoDB is used to store, query and index JSON data</li></ul><ul id="f5ed9f9b-ae1e-4565-a64d-f46870bb48f0" class="bulleted-list"><li>Similar &quot;deployment concepts&quot; as Aurora</li></ul><ul id="ed12de64-dd32-4669-a503-181b288fbf9d" class="bulleted-list"><li>Fully Managed, highly available with replication across 3AZ</li></ul><ul id="2d7315bb-071e-4c7f-ba76-153b27c2d298" class="bulleted-list"><li>Aurora storage automatically grows in increments of 10Gb, upto 64 TB</li></ul><ul id="f103a502-d252-4a84-b59e-432201100140" class="bulleted-list"><li>Automatically scales to workloads with millions of requests per second</li></ul><p id="da13d996-907d-459b-9e94-90b4ffe166ed" class="">
+</p><p id="011d866f-9a21-48ac-9fc7-c861abf9c94b" class="">
+</p><p id="197ccf01-e6ed-4890-917f-99cb1f448e81" class="">
+</p><h1 id="30729b6d-7e88-47fb-9e35-6f49d086182e" class="">Amazon Neptune</h1><ul id="0d62f492-7a83-4202-ba3c-cd785599a2cf" class="bulleted-list"><li>Fully managed graph db</li></ul><ul id="fe49af65-dccf-4e65-8090-893c3ae04e89" class="bulleted-list"><li>A popular graph datasets would be a social network<ul id="a91f509b-d63a-40fb-ba67-5310ebe31f3b" class="bulleted-list"><li>Users have friends</li></ul><ul id="704b7851-3a8b-4de1-bfc5-cd9a5d043396" class="bulleted-list"><li>Comments</li></ul><ul id="03bd22de-f528-4634-a877-2ef0233e9b76" class="bulleted-list"><li>Likes</li></ul><ul id="2cd6efbd-342e-4002-9e20-eeb51985a7c0" class="bulleted-list"><li>Shares</li></ul></li></ul><ul id="4eda4cac-36be-4884-96ee-39cdf59885fa" class="bulleted-list"><li>Highly available across 3AZ, with up to 15 read replicas</li></ul><ul id="5df30e32-b572-4971-8ff1-adb3729ea513" class="bulleted-list"><li>Build and run application working with highly connected datasets- optimised for these complex and hard queries</li></ul><ul id="9b528461-b4a4-468e-9438-de70c804cd5e" class="bulleted-list"><li>Can store up to billions of relations and query the graph with milliseconds latency</li></ul><ul id="be61ef4a-13ae-4869-af5f-6d60f754df56" class="bulleted-list"><li>Highly available with replication across multi AZ</li></ul><ul id="56d6ec6c-857e-4b4c-a9a8-9f5a99c20e73" class="bulleted-list"><li>Great for knowledge graph, fraud detection, recommendation engines, social network</li></ul><p id="2cc92a6f-0410-4d08-b643-bb28e10e8791" class="">
+</p><p id="a4a3799b-dc18-4b6d-b0a2-79ba0cc65104" class="">
+</p><p id="adc7e011-357d-48ba-8617-a974c1bcaca4" class="">
+</p><h1 id="271b01fc-247c-4294-be41-0cfbe20cac47" class="">Amazon QLDB</h1><ul id="e2458bf4-3e0c-4fdd-8531-31f51718d761" class="bulleted-list"><li>QLDB stands for &quot;Quantum Ledger DB&quot;</li></ul><ul id="cd4ccf64-5861-415c-a009-1e386e31916a" class="bulleted-list"><li>A ledger is a book recording financial transaction</li></ul><ul id="d385dd47-2c41-4ce8-bddb-122623da47d3" class="bulleted-list"><li>Fully managed, serverless, high available, replication across 3 AZ</li></ul><ul id="8cb01ce9-50ea-43cc-9baa-160e52822e2e" class="bulleted-list"><li>Used to review history of all the changes made to your application data over time</li></ul><ul id="fcc28ffb-aca4-42d8-8487-e1aeb43703f8" class="bulleted-list"><li>Immutable system: no entry can be removed or modified, cryptographically verfiable</li></ul><ul id="a958a69b-c8fe-461f-a57a-ad30e5f3586e" class="bulleted-list"><li>2-3x better performance than common ledger blockchain frameworks, manipulate using sql</li></ul><ul id="4c5c9995-c417-405a-aa78-65efa94406d1" class="bulleted-list"><li>Diff with Amazon manged blockchain: no decentralisation component, in accordance with financial regulation. </li></ul><p id="5e9b5162-1dae-4289-b1af-8088716a9aec" class="">
+</p><p id="e3c05bd8-5bd4-4eee-bfed-f13236f651fb" class="">
+</p><p id="5fa810bb-8559-434e-a20e-24f27f8e255f" class="">
+</p><h1 id="79f9721b-f447-45f8-8f4a-49cd8c462a8e" class="">Database Migration Service</h1><ul id="00587d75-426b-4493-b316-46c59f7c48b3" class="bulleted-list"><li>Quickly and secure migrate db to AWS, resilient, self healing</li></ul><ul id="32921ef3-64fd-4a59-8677-58d51924cc8f" class="bulleted-list"><li>The source db remains available during migration.</li></ul><ul id="449603c6-8a3a-4b0a-98c5-6045ff5a8210" class="bulleted-list"><li>Supports:<ul id="f801ca25-6d55-40f3-b187-1f29226ea761" class="bulleted-list"><li>Homogeneous migrations: ex Oracle to Oracle</li></ul><ul id="f8182dc2-1dfb-4cee-be83-bcaede11a303" class="bulleted-list"><li>Heterogeneous migrations: ex Microsoft SQL Server to Aurora. </li></ul></li></ul><p id="ce7d7473-3683-464a-b846-6a62e5549b07" class="">
+</p><p id="d53be189-1905-4d5f-a835-9cf49a982927" class="">
+</p><p id="458d092a-9a10-4f09-b5bc-d8f72f687f38" class="">
+</p><h1 id="b6f26662-5700-4ad3-a39b-dda9b7345866" class="">Glue</h1><ul id="490587e2-8e13-40c0-b761-d5784e1096ee" class="bulleted-list"><li>Managed extract, transform, and load (ETL) service</li></ul><ul id="26ecf825-fa50-4e4c-85d7-ad9d38d9218d" class="bulleted-list"><li>Useful to prepare and transform data for analytics</li></ul><ul id="6ae0d7b1-6571-4799-bffe-adb9504039b4" class="bulleted-list"><li>Fully serverless service </li></ul><figure id="9bce1fce-0f9f-454d-9279-8135b0e45f00" class="image"><a href="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%207.png"><img style="width:950px" src="Databases%20&amp;%20Analytics%20d6b262fe5db244739c36f11698a2ab63/Untitled%207.png"/></a></figure><p id="9bc5caf6-c6c6-46a6-8af3-65081c190be6" class="">
+</p></div></article></body></html>

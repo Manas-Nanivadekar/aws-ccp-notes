@@ -1,0 +1,663 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cloud Monitoring </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="257ef4db-77d3-4a2b-9b68-8f7816d10f97" class="page mono"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_emanuel_leutze.jpg" style="object-position:center 30.000000000000004%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🖥️</span></div><h1 class="page-title">Cloud Monitoring </h1></header><div class="page-body"><h1 id="8c18bb9b-5b2a-46c0-bf4c-79ccd6ddf347" class="">Amazon CloudWatch Metrics</h1><ul id="7f490c9b-6546-48bf-8836-eb103cefb647" class="bulleted-list"><li>CloudWatch provides metrics for every service in AWS</li></ul><ul id="1d55db7a-d4c8-4f4c-9585-bee78ccd82b9" class="bulleted-list"><li>Metric is a variable to monitor.</li></ul><ul id="5e4a2829-25d2-437f-a7ae-8babc1dba593" class="bulleted-list"><li>Metrics have timestamp</li></ul><ul id="ed77544d-710e-472f-beea-2537798a9dc0" class="bulleted-list"><li>Can create CloudWatch dashboards of metrics</li></ul><h2 id="2f7e657d-17a9-442f-b3d3-65aee7411e7d" class="">Imp Metrics</h2><ul id="09f52ed0-d799-498b-8e35-3870f0575673" class="bulleted-list"><li>EC2 instances: CPU Utilisation, Status Checks, Network(Not RAM)<ul id="3f70a753-04b7-437a-88ba-15549cc91dd4" class="bulleted-list"><li>Default metrics every 5 mins</li></ul><ul id="606570b1-9bf6-4426-aac7-ede23cbbb88c" class="bulleted-list"><li>Option for Details Monitoring($$$): metrics every 1 min</li></ul></li></ul><ul id="1641a439-5761-410c-a90f-92d9f666c5d8" class="bulleted-list"><li>EBS volumes: Disk Read/Write</li></ul><ul id="98611fbd-b9dc-4f33-b358-7d982a0bd5a6" class="bulleted-list"><li>S3 Buckets: BucketSizeBytes, NumberOfObjects, AllRequests</li></ul><ul id="7de7c233-f065-46b2-b94f-c84c00f06f69" class="bulleted-list"><li>Billing: Total Estimated Changre</li></ul><ul id="e55fc44b-3f21-425e-8bc1-3a28a82322b1" class="bulleted-list"><li>Service Limits: How much you&#x27;ve been using a service API</li></ul><ul id="25afc943-8e8d-499e-885c-7d78fa910336" class="bulleted-list"><li>Custom metrics: push your own metrics</li></ul><p id="9db619b1-7bde-447e-9da1-79d5ee0ef055" class="">
+</p><p id="0da11a3b-e9fd-4cf2-a685-a8745d1c4bc6" class="">
+</p><p id="3cedd492-7e49-4874-a4a5-8636fcc9ff60" class="">
+</p><h1 id="4d6cce04-53ba-4db6-aebc-df9df21883f2" class="">Amazon CloudWatch Alarms</h1><ul id="04ebe064-4333-4442-a5ba-5e68a13c7725" class="bulleted-list"><li>Alarms are used to trigger notifications for any metric </li></ul><ul id="fe8bc9e7-be46-4e8a-bcfe-5d9d57262b3f" class="bulleted-list"><li>Alarms actions:<ul id="2e306555-9102-43c3-be15-8387b9e08f6d" class="bulleted-list"><li>Auto Scaling: increase or decrease EC2 instances &quot;desired&quot; count</li></ul><ul id="d74d0d11-a796-4770-8f7b-593d2d521925" class="bulleted-list"><li>EC2 Actions: Stop, terminate, reboot or recover an EC2 instances</li></ul><ul id="09958cfe-a874-4715-89bb-c8e1123a7f98" class="bulleted-list"><li>SNS notification: send a notification into an SNS topic</li></ul></li></ul><ul id="52c9cc34-acb9-4dbf-b9b0-91cda35db2c6" class="bulleted-list"><li>Various options(sampling, %, max, min,etc.)</li></ul><ul id="ee967ba3-f8c7-4749-89a5-7a1ca27f2c23" class="bulleted-list"><li>Can choose the period on which to evaluate an alarm.</li></ul><p id="0f90e195-9054-42dc-b117-833277a4d262" class="">
+</p><p id="09b21a0f-3ee7-4cfc-9d4c-674614228d1a" class="">
+</p><p id="19640761-ff14-4f56-8c52-2aec31d97dc0" class="">
+</p><h1 id="2ea4ea6c-7cba-4ba5-a862-fcdcb8378a49" class="">Amazon CloudWatch Logs</h1><ul id="2c87cbd1-03ab-496f-b1d5-43011e0de6fe" class="bulleted-list"><li>CloudWatch Logs can collect log from:<ul id="d86be0df-9dee-4fd6-8ac6-968901800b59" class="bulleted-list"><li>Elastic Beanstalk: Collection of logs from application</li></ul><ul id="abab99b3-02ff-42f9-8269-ad581d5166fe" class="bulleted-list"><li>ECS: collection from containers</li></ul><ul id="aa1f58ca-e181-4d05-b999-5c52311c9ade" class="bulleted-list"><li>AWS Lambda: collection from function logs</li></ul><ul id="5f12c8e1-e01d-4916-a869-6b5977a76f09" class="bulleted-list"><li>CloudTrail based on filter</li></ul><ul id="af5a9551-233f-4e4b-91b8-572332edba5f" class="bulleted-list"><li>CloudWatch log agents: on EC2 machines or on-premises servers</li></ul><ul id="c137d08e-b45a-4706-8dd4-9c1943837c91" class="bulleted-list"><li>Route53: Log DNS queries</li></ul></li></ul><ul id="81bbf7ee-702e-4468-ac9c-ec7d297e1d4a" class="bulleted-list"><li>Enables real-time monitoring of logs</li></ul><ul id="5f8ca40a-ac09-4fec-a8f3-8a85c0958b8b" class="bulleted-list"><li>Adjustable CloudWatch Logs retention</li></ul><h2 id="e542c7ff-e558-4967-a05e-c0694da15bbb" class="">CloudWatch Logs for EC2</h2><ul id="5ccea5c4-ba04-46d2-b2d5-47cb39eb5bbe" class="bulleted-list"><li>By default, no logs from your EC2 instance will go to CloudWatch.</li></ul><ul id="450c5312-0166-45b5-b28c-45c5504ea17b" class="bulleted-list"><li>You need to run a CloudWatch agent on EC2 to push the log files you want</li></ul><ul id="f0852aef-19ea-42c1-8697-6f9f544bc20d" class="bulleted-list"><li>Make sure IAM permissions are correct</li></ul><ul id="333d7062-120f-4e20-ad93-b440044823cf" class="bulleted-list"><li>The CloudWatch log agent can be set up on-premises too.</li></ul><p id="8259710d-7f88-4847-8a4f-710114c79d55" class="">
+</p><p id="427173a5-23ce-4ba6-8ea7-302649e9dd29" class="">
+</p><p id="fcff7159-55f8-4e49-b303-14d56a49bd5a" class="">
+</p><h1 id="3258e926-0bc9-4a20-b115-356e7584519d" class="">Amazon CloudWatch Events</h1><ul id="d1e7a6e5-b644-41e4-825c-7b4ef73d8adc" class="bulleted-list"><li>Schedule: Cron jobs(scheduled scripts)</li></ul><ul id="9aeab13c-9780-4ed3-b691-6fa5c0604833" class="bulleted-list"><li>Event Patters: Event rules to react to a service doing something</li></ul><ul id="68f5cd7c-65ba-460e-a572-963ee246d348" class="bulleted-list"><li>Trigger Lambda functions, send SQS/SNS messages</li></ul><p id="df021405-3791-4c43-bc53-01323412cf5d" class="">
+</p><p id="5bcc7519-9cf6-4eb7-997a-be22268158d9" class="">
+</p><p id="f22459de-caf4-4a12-9050-da50fa66f007" class="">
+</p><h1 id="3b694315-c61b-4e0b-a572-439885e73865" class="">Amazon EventBridge </h1><ul id="a0515649-7b34-4636-af88-c1d1a3e50b63" class="bulleted-list"><li>EventBridge is the next evolution of CloudWatch Events</li></ul><ul id="305698c4-16ee-4cf1-8ae0-6dc2d3acee5f" class="bulleted-list"><li>Default event bus: generated by AWS services (CloudWatch Events)</li></ul><ul id="43ffa7ff-3778-4d60-bb57-e00f13531ddc" class="bulleted-list"><li>Partner event bus: receive events from SaaS service or applications</li></ul><ul id="577abafa-6230-4667-87c3-a9a2bae07a6d" class="bulleted-list"><li>Custom Event Buses: for your own application</li></ul><ul id="2fd6ee97-c719-4334-881d-c89f53bcd4eb" class="bulleted-list"><li>Schema Registry: model event schema</li></ul><ul id="b45ee976-e36d-4fbf-94d7-a7791dcb12ca" class="bulleted-list"><li>EventBridge has a different name to mark the new capabilities</li></ul><ul id="34ebd5b0-6b7a-4760-bc36-78585f75069d" class="bulleted-list"><li>The CloudWatch Events name will be replaced with EventBridge</li></ul><p id="94f33894-859f-4602-bceb-6ec22ba29384" class="">
+</p><p id="f99ce137-9233-4745-883f-ab1bb03f590d" class="">
+</p><p id="2546ebae-680d-457c-8fdd-0ae2f37b37fd" class="">
+</p><h1 id="55886c81-7c51-4abd-b380-0e3c5e1cbc33" class="">AWS Cloud Trail</h1><ul id="ba20aaf6-0966-4e1e-8c09-f420a0b911c8" class="bulleted-list"><li>Provides governance, compliance and audit for your AWS Account</li></ul><ul id="5baa34d9-7854-44dc-8df3-9f391d5b4936" class="bulleted-list"><li>CloudTrail is enabled by deafult</li></ul><ul id="d842cd0a-04e7-4ed5-bb10-ad3ac6aba6be" class="bulleted-list"><li>Get an history of events/API calls made with your AWS account by:<ul id="b505ce63-0621-413b-9a1a-1e40fa68bc82" class="bulleted-list"><li>Console</li></ul><ul id="79e84c5f-83ca-4b68-b8a1-904e95e06cbf" class="bulleted-list"><li>SDK</li></ul><ul id="67a779c8-7075-4661-a1b9-cc5eec0a37e6" class="bulleted-list"><li>CLI</li></ul><ul id="6a3f3d18-0bee-426a-abb4-242d0c98e8ce" class="bulleted-list"><li>AWS Service</li></ul></li></ul><ul id="0d94e09b-4193-4ad3-8f35-88967159725b" class="bulleted-list"><li>Can put logs from CloudTrail into CloudWatch logs or S3</li></ul><ul id="f5a925e6-171c-421d-98e9-af70985a0766" class="bulleted-list"><li>A trail can be applied to All regions or a single region.</li></ul><ul id="528e3c08-1f93-45d1-89f6-fd1f522304bb" class="bulleted-list"><li>If a resource is deleted in AWS, investigate CloudTrail first!</li></ul><p id="0d7d96a2-62d5-44bd-9ff8-e04ff6a0eccf" class="">
+</p><p id="117cd5e6-9c75-43c4-9c4e-1f94ebf09445" class="">
+</p><p id="691bc7ac-13b8-4645-90f7-5090871c66c7" class="">
+</p><h1 id="e78b32eb-9166-4f1d-b48a-85c96d5cbb86" class="">AWS X-Ray</h1><ul id="e96c31f2-d5c3-4558-85cf-03b3bdfe774e" class="bulleted-list"><li>Debugging in Prod, the good old way:<ul id="9ef28721-35e6-497f-8f39-d39f6cc245f6" class="bulleted-list"><li>Test locally</li></ul><ul id="5dcf11bf-f727-427f-885d-8462e1bf080b" class="bulleted-list"><li>Add log statements everywhere</li></ul><ul id="6371fcf9-6cd5-4c8c-9070-e42c50a47de0" class="bulleted-list"><li>Re-deploy in prod</li></ul></li></ul><ul id="03a552b0-66e7-48d1-a19a-46f74c781dc2" class="bulleted-list"><li>Log formats differ across application and log analysis is hard</li></ul><ul id="c2a5e9d5-3954-43ea-b953-2fd4a6b9f751" class="bulleted-list"><li>Debugging: on big monolith &quot;easy&quot;, distributed services &quot;hard&quot;</li></ul><ul id="06142d85-8808-469e-bfe6-c44e3b351f10" class="bulleted-list"><li>No common views of your entire architecture</li></ul><h2 id="da63deb0-d89d-4148-bfb6-96b23985f689" class="">Visual Analysis of your Application</h2><figure id="f39563d5-0527-4947-8a47-81efc7c93136" class="image"><a href="Cloud%20Monitoring%20257ef4db77d34a2b9b688f7816d10f97/Untitled.png"><img style="width:879px" src="Cloud%20Monitoring%20257ef4db77d34a2b9b688f7816d10f97/Untitled.png"/></a></figure><h2 id="bf51cf70-5d1f-4599-9159-b04fc307188a" class="">AWS X-Ray Advantages</h2><ul id="661de638-6e03-43f2-8a6c-19c2fbf16a26" class="bulleted-list"><li>Troubleshooting performance </li></ul><ul id="839b2ba4-dc4e-4dcc-952a-28c9fab620e5" class="bulleted-list"><li>Understand dependencies in a microservice arch</li></ul><ul id="fffda59d-0eaf-4524-aaba-0a5c3454c969" class="bulleted-list"><li>Pinpoint service issues</li></ul><ul id="b6722f87-aa79-4df8-8ff3-4bdeac6ecd20" class="bulleted-list"><li>Review request behaviour</li></ul><ul id="319899ad-ff2f-4f66-85c6-844023826a3d" class="bulleted-list"><li>Find errors and exceptions</li></ul><p id="94419976-e287-4215-abb1-0630f5c29d67" class="">
+</p><p id="684ab03f-ab5d-44aa-8779-89b49626f6db" class="">
+</p><p id="6b5e5c0c-75ea-401f-8e95-bdb9b6423566" class="">
+</p><h1 id="b6a30432-34e0-4fb6-adcb-51d333b83c7f" class="">Amazon CodeGuru</h1><ul id="4fdf7e32-4864-472b-87c3-5251a87d0c0b" class="bulleted-list"><li>An ML-powered service for automated code reviews and application performance recommendations</li></ul><ul id="00897e82-c473-46e1-b17c-d5fa30d350fa" class="bulleted-list"><li>Provide two functionalities:<ul id="77a6793d-8b0d-47a6-a955-8db76a0fee6b" class="bulleted-list"><li>CodeGuru Reviewer: automated code reviews for static code analysis (dev)</li></ul><ul id="187b882b-1c2e-40f4-86cc-f943acd83a08" class="bulleted-list"><li>CodeGuru Profiler: visibility/recommendations about application performance during runtime(prod)</li></ul></li></ul><figure id="b39aa808-b77b-494d-a3b3-eee4c0e6f409" class="image"><a href="Cloud%20Monitoring%20257ef4db77d34a2b9b688f7816d10f97/Untitled%201.png"><img style="width:1039px" src="Cloud%20Monitoring%20257ef4db77d34a2b9b688f7816d10f97/Untitled%201.png"/></a></figure><p id="1cf53f15-c3ff-4ac9-8f45-3e632b52f939" class="">
+</p><p id="6c8c4311-3230-4274-92fa-0b4937e12417" class="">
+</p><p id="a70ab864-9f9a-417c-b529-fa1ac1f8ab71" class="">
+</p><h1 id="a9d28184-bb08-42b0-983e-ea9b91272da0" class="">AWS Status - Service Health Dashboard</h1><ul id="3e7c5341-91be-4899-86f9-5ed905d2d25b" class="bulleted-list"><li>Shows all regions, all services health</li></ul><ul id="51dd6f6b-e9bc-4799-a10e-3e08ab965251" class="bulleted-list"><li>Show historical information</li></ul><ul id="42211596-da0f-4113-84e4-080894ceb529" class="bulleted-list"><li>Has an RSS feed you can subscribe to</li></ul><p id="d7dcec2d-3995-4930-8630-2cdc3bc4b340" class="">
+</p><p id="105458aa-1187-4aff-b306-a78ddad3d6cb" class="">
+</p><p id="be340d0b-f2ec-4c48-89b8-8a73aa96025a" class="">
+</p><h1 id="d8567645-b9df-4470-b94a-70ef6533fac9" class="">AWS Personal Health Dashboard(PHD)</h1><ul id="6fd6b173-29b8-4b5b-912e-4832cd208bc0" class="bulleted-list"><li>AWS PHD provides alerts and remediation guidance when AWS is experiencing events that may impact you.</li></ul><ul id="ead3c677-4e03-4953-9cc9-6ef01de786bf" class="bulleted-list"><li>While the service health dashboard displays the general status of AWS services, PHD gives you a personalised view into the performance and availability of the AWS services underlying your AWS resources.</li></ul><ul id="6f162ba7-b396-4f7b-ab91-19e7c81781f7" class="bulleted-list"><li>The dashboard displays relevant and timely info to help you manage events in progress and provide proactive notification to help you plan for scheduled activities.</li></ul><ul id="331af72d-e241-4a9b-b794-c610a2ef3698" class="bulleted-list"><li></li></ul></div></article></body></html>

@@ -1,0 +1,656 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Global Infra</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f52d18b4-e247-423a-b92a-87d71e56e98d" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">🌍</span></div><h1 class="page-title">Global Infra</h1></header><div class="page-body"><h1 id="f4241a80-735b-4f9a-a5a4-b739294c845e" class="">Why make a global application?</h1><ul id="a78879ae-fc39-4537-8d69-aef500c3fd6d" class="bulleted-list"><li>A global application is an application deployed in multiple geographies</li></ul><ul id="d6e04f52-c1d3-4686-9e76-805a4182592a" class="bulleted-list"><li>On AWS: this could be Regions and/or Edge Locations</li></ul><ul id="e11704ab-2961-4cf2-b94a-4bd0517db77f" class="bulleted-list"><li>Decreased Latency<ul id="cd7807ae-e7f5-4d5d-b601-0fd1b1812d6e" class="bulleted-list"><li>Latency is the time it takes for a network packet to reach a server.</li></ul><ul id="66ec35c3-5643-4d9b-b8e2-6a0db0f64cfd" class="bulleted-list"><li>It takes time for a packet from Asia to reach USA</li></ul><ul id="d84b97b4-1ea9-4d3d-8a22-5ef0f5c3be4a" class="bulleted-list"><li>Deploy your application closer to your user to decrease latency, better experience</li></ul></li></ul><ul id="8b47c09d-d274-465b-a4f0-1fcdc95affaf" class="bulleted-list"><li>Disaster Recovery(DR)<ul id="44daeb20-de38-4078-90ff-5ac98391d64a" class="bulleted-list"><li>If an AWS region goes down</li></ul><ul id="a55906a4-d089-4e46-8a5a-299e5aaefaa8" class="bulleted-list"><li>You can fail-over to another region and have your application still working</li></ul><ul id="9856b365-5a9d-4d1b-b4ef-b1eac24ccb2f" class="bulleted-list"><li>A DR plan is important to increase the availability of your application</li></ul></li></ul><ul id="3e3f7d81-5e7f-4dcc-9b9f-847aea659399" class="bulleted-list"><li>Attack Protection: Distributed global infra is harder to attack</li></ul><p id="fe9156df-119a-4ed6-b721-87d50edd30e0" class="">
+</p><p id="5959cdd3-4aaf-4ec9-b33d-9ba7ed5304da" class="">
+</p><p id="49a5bdf4-bb81-40c7-a3b9-0e9e57bfa4da" class="">
+</p><h1 id="593ba0bd-7e42-49e3-8814-32e309995b26" class="">Route 53</h1><ul id="ca06f8ca-48de-4615-b8f5-bee6a23bce84" class="bulleted-list"><li>Route 53 is a Managed DNS (Domain Name System)</li></ul><ul id="6a77b788-1bcc-4382-a91b-c8b7436fab8b" class="bulleted-list"><li>DNA is a collection of rules and records that helps clients understand how to reach a server through URLs.</li></ul><ul id="5ce9b66b-da37-496d-a41b-788336478b60" class="bulleted-list"><li>In AWS, the most common records are:<ul id="578bd8bf-e0d9-4b1e-a12d-ad6ebe9c36f7" class="bulleted-list"><li><a href="http://www.google.com">www.google.com</a> ⇒ 12.34.56.78 == &quot;A&quot; record (IPv4)</li></ul><ul id="6b1f1973-8be0-4913-b613-c1313365f076" class="bulleted-list"><li><a href="http://www.google.com">www.google.com</a> ⇒ 2001.0db8.85a3:0000:0000:8a2e:0370:7334 == AAAAIPv6</li></ul><ul id="26509a4a-4676-48a3-b823-bd6279e819b2" class="bulleted-list"><li><a href="http://search.google.com">search.google.com</a> ⇒ <a href="http://www.google.com">www.google.com</a> == CNAME: hostname to hostname</li></ul><ul id="ae3f7aed-efe3-43ef-926f-9ed6abb33051" class="bulleted-list"><li><a href="http://example.com">example.com</a> ⇒ AWS resource == Alias (Ex: ELB, CloudFront, S3, RDS, etc...)</li></ul></li></ul><h2 id="e7d9be9d-838d-4861-a2ba-2c0c65f37822" class="">Diagram for &quot;A&quot; Record</h2><figure id="28d33207-cacc-41ec-9036-2a30c587be13" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled.png"><img style="width:790px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled.png"/></a></figure><h2 id="0d953cd8-9440-4812-b734-6708175a8e9a" class="">Routing Policies</h2><ol id="4f70d5e0-af52-4cc9-832b-07405f9f13af" class="numbered-list" start="1"><li>Simple Routing Policy </li></ol><figure id="c0b65968-5fb1-4f9d-aa19-1397367bb620" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%201.png"><img style="width:525px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%201.png"/></a></figure><ol id="4d1229c8-7a2c-497f-9897-f13b4c61ebdc" class="numbered-list" start="1"><li>Weighted Routing Policy</li></ol><ul id="31c6e98e-5511-4ac5-99d4-131682b4f57f" class="bulleted-list"><li>Traffic is distributed to EC2 instances depending upon their weight</li></ul><figure id="3b7f6133-3c1a-4e0b-ba8c-799276811001" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%202.png"><img style="width:548px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%202.png"/></a></figure><ol id="6f26e192-bcc5-4538-a0bf-d35d5813e5ae" class="numbered-list" start="1"><li>Latency Routing Policy</li></ol><ul id="97e6b564-3f07-4669-b65b-b11db4a6934c" class="bulleted-list"><li>Depends on Location</li></ul><figure id="44ff0151-a980-4f98-9848-14c3212934e9" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%203.png"><img style="width:527px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%203.png"/></a></figure><ol id="46be64b4-2c7f-421e-9b6f-eeed554a4d3d" class="numbered-list" start="1"><li>Fail-over routing policy</li></ol><figure id="ec0690d7-09bf-4b6e-87c8-36e4ae6af7f3" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%204.png"><img style="width:538px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%204.png"/></a></figure><p id="eeb85272-f45b-47e6-bdc6-c1eb6b288c38" class="">
+</p><p id="ca3b31b8-3f50-4d8a-b4cc-042c24943980" class="">
+</p><p id="ce2ff9ac-99b5-4fd7-843c-b4fc685102c9" class="">Hash func output + data </p><p id="9f0a3356-2992-4ca3-9004-66860a663597" class="">
+</p><p id="7f0d41de-256d-4f60-956f-08709ec6f3e2" class="">
+</p><p id="b9c4dec4-2f26-4511-af50-c29bd69af680" class="">
+</p><h1 id="5949070d-9b60-441a-a014-55f4da160c26" class="">CloudFront</h1><ul id="46e03485-717f-4b9d-95ec-410e8acdae7b" class="bulleted-list"><li>Content Delivery Network(CDN)</li></ul><ul id="29683727-c3e0-40f8-8d18-cfc5b68c9502" class="bulleted-list"><li>Improves read performance, content is cached at the edge</li></ul><ul id="21c52359-f122-4217-b2af-4152a465acc6" class="bulleted-list"><li>Improves users experience</li></ul><ul id="ce07f9c5-ba72-45a1-bdfc-f2d8ff9047bd" class="bulleted-list"><li>DDoS protection, integration with Shield, AWS Web Application Firewall</li></ul><h2 id="06a6b3d0-8f6e-41c5-ac69-c4d6185df67d" class="">Origins</h2><ul id="dd1a3733-9dcc-4b99-a6da-18b840165122" class="bulleted-list"><li>S3 <ul id="8d4777e9-9cd2-4d68-b3d9-29c1e69222c4" class="bulleted-list"><li>For distributing files and caching them at the edge</li></ul><ul id="6cfef42f-67e5-460f-924f-b68ee2b073cd" class="bulleted-list"><li>Enhanced security with CloudFront Origin Access Identity(OAI)</li></ul><ul id="b99e2b2f-1a81-4f52-83fc-4fdd6885b8da" class="bulleted-list"><li>CloudFront can be used as an ingress(to upload files to S3)</li></ul></li></ul><ul id="75487ee3-9bb6-4062-be5e-93cabe149fe5" class="bulleted-list"><li>Custom Origin(HTTP)<ul id="cc4abb5f-a242-4908-ac5d-fa90c758eda5" class="bulleted-list"><li>Application Load Balancer</li></ul><ul id="a0031a18-4b69-428e-8a7c-2a6a3cc0bef9" class="bulleted-list"><li>EC2 instance</li></ul><ul id="cc82db69-eda6-425f-831b-e98b86f15647" class="bulleted-list"><li>S3 website(must first enable the bucket as a static S3 website)</li></ul><ul id="13690338-3239-4f31-a082-c79cb8ae1328" class="bulleted-list"><li>Any HTTP backend one wishes</li></ul></li></ul><h2 id="008766e5-c2b2-44c9-81fe-ea78ba27e181" class="">CloudFront - S3 as an Origin</h2><figure id="f4052f89-279d-42f4-ad5c-64593bac0e2d" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%205.png"><img style="width:974px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%205.png"/></a></figure><h2 id="10395c55-f249-4680-aa62-4c866abd6c2b" class="">CloudFront vs S3 Cross Region Replication</h2><ul id="dfce75b6-b10f-4032-9079-913bf83e8756" class="bulleted-list"><li>CloudFront:<ul id="374528f4-3b41-4d45-8e2a-ad99bf7d3f75" class="bulleted-list"><li>Global Edge Network</li></ul><ul id="105e55e2-dee7-478d-b7b4-f09212829110" class="bulleted-list"><li>Files are cached for a TTL(maybe for a day)</li></ul><ul id="50532d1c-1365-46bd-82c3-4cb129a44ef8" class="bulleted-list"><li>Great for static content that must be available everywhere.</li></ul></li></ul><ul id="3d761459-782f-40ed-89f2-281c08bb5a1f" class="bulleted-list"><li>S3 Cross Region Replication:<ul id="b2c82007-ea87-4ad0-a6e1-cd5dcf144ee3" class="bulleted-list"><li>Must be setup for each region you want replication to happen</li></ul><ul id="d16cacaa-aa85-41d8-ac0e-9736c7e1a428" class="bulleted-list"><li>Files are updates in near real-time</li></ul><ul id="b4cb8320-38ef-41d6-ad8e-de51865b5998" class="bulleted-list"><li>Read only</li></ul><ul id="0c4b473b-d707-4ee7-8905-7aa1d95c1cdc" class="bulleted-list"><li>Great for dynamic content that needs to be available at low-latency in few regions.</li></ul><p id="54a58db6-51c9-4678-af12-54ac91414fc3" class="">
+</p><p id="7ab0d440-a704-40e1-a99d-dee79badd639" class="">
+</p><p id="e7d77af1-de8a-447b-a015-f9bc2401e1e3" class="">
+</p><h1 id="eaff2f14-2124-43c9-a17d-3a8ce8a066bb" class="">S3 Transfer Acceleration</h1><ul id="9737d867-a63c-43c3-b1f7-15efae6d74bf" class="bulleted-list"><li>Increase transfer speed by transferring file to an AWS edge location that will forward the data to the S3 bucket in the target region.</li></ul><figure id="64dcd63c-cd01-4562-bb1f-14d6b8404d7b" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%206.png"><img style="width:868px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%206.png"/></a></figure><p id="eb451a63-e3ff-4305-ac06-8be516e4fad1" class="">
+</p><p id="f2ee9278-0156-4f52-9e09-8d67aac431eb" class="">
+</p><p id="af1c95eb-9765-4354-81dc-c77db91f039b" class="">
+</p><h1 id="df3224ea-3af0-44a9-b74d-eaaf2cc979ad" class="">AWS Global Accelerator</h1><ul id="580765e9-d037-4ae2-a8cd-afbea12e388f" class="bulleted-list"><li>Improve global application availability and performance using the AWS global network.</li></ul><ul id="6a509768-e94f-4d0b-9ad7-87058fa596f7" class="bulleted-list"><li>Leverage the AWS internal network to optimise the route to your application (60% improvement).</li></ul><ul id="f9bebfcf-258f-4332-a43a-78cbe86c6e6d" class="bulleted-list"><li>2 Anycast IP are created for your application and traffic is sent through Edge Location.</li></ul><ul id="b5562d08-a2a2-411a-b2c4-a63342a2d8e5" class="bulleted-list"><li>The edge location sends the traffic to your application.</li></ul><figure id="f80dcccf-f68f-4010-863d-5fa1ec7d8030" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%207.png"><img style="width:565px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%207.png"/></a></figure><figure id="7c638991-233a-4e57-acd4-0f9bf609586d" class="image"><a href="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%208.png"><img style="width:1076px" src="Global%20Infra%20f52d18b4e247423ab92a87d71e56e98d/Untitled%208.png"/></a></figure><p id="a802d03e-a42f-4d91-978c-080e5f5557aa" class="">
+</p><p id="a3da62c7-fe8b-4155-b215-3c9218f80821" class="">
+</p><p id="f700d828-8f4a-42f5-9dc7-daec326eb72d" class="">
+</p><h1 id="0895c072-2e69-465a-afa9-7ef4cc54d33a" class="">AWS Outposts</h1><ul id="d340523e-bb76-439f-9e77-2e6b57c09a62" class="bulleted-list"><li><strong>Hybrid Cloud</strong>: Business that keep an on-premises infra alongside a cloud infra</li></ul><ul id="2b5e32ff-15cd-4e89-9e6c-9c43ba1d6667" class="bulleted-list"><li>Therefore, two ways of dealing with IT systems: <ul id="01e765d1-2703-4644-ab4e-2416dd74ee53" class="bulleted-list"><li>One for the AWS cloud</li></ul><ul id="50c9143c-31ad-4cbd-906e-dbfda6ff3f2b" class="bulleted-list"><li>One for their on-premises infra</li></ul></li></ul><ul id="c9ce8775-549d-4435-967a-0e12954226a8" class="bulleted-list"><li><strong>AWS Outposts are &quot;server racks&quot;</strong> that offers the same AWS infra, service, API&#x27;s &amp; tools to build your own application on-premises just as the cloud.</li></ul><ul id="c01af290-6cc0-45d7-adbf-35542b4c6863" class="bulleted-list"><li><strong>AWS will setup and manage &quot;Outposts Racks&quot;</strong> within your on-premises infra and you can start leveraging AWS service on-premises.</li></ul><ul id="89f9d87b-fe1d-416c-a450-0b7735bdb3c2" class="bulleted-list"><li>Benefits:<ul id="c69a0dd8-64a6-49a2-9047-03a69c5ea606" class="bulleted-list"><li>Low-latency access to on-premises systems</li></ul><ul id="4da727d0-a30b-4e7d-b0cb-e94e225873db" class="bulleted-list"><li>Local data processing</li></ul><ul id="f6f55dd8-aaf2-48eb-8bc5-533b75899bdc" class="bulleted-list"><li>Data residency</li></ul><ul id="eee78b45-2b0f-4d3f-b54f-f88deb4318bd" class="bulleted-list"><li>Easier migration from on-premises to the cloud</li></ul><ul id="34593358-442c-4d7e-8457-09c8329df828" class="bulleted-list"><li>Fully managed service</li></ul></li></ul><p id="f0488dd4-f717-4c91-9ab3-79b08e7a1b4e" class="">
+</p><p id="b9817c66-ab77-44e7-aca1-b72db6f07b5c" class="">
+</p><p id="4ae2e8c7-6d31-4abd-9998-b5c263d428b5" class="">
+</p><h1 id="3eda4ddd-768b-4309-b0af-a61a2df4d243" class="">AWS WaveLength</h1><ul id="d1c612de-6bbf-407a-b7fb-4f065d919c57" class="bulleted-list"><li>WaveLength Zone are infra deployments embedded within the telecommunications providers datacenters at the edge of the 5G network</li></ul><ul id="90dd3a92-2769-4586-8a5e-6281acd4152a" class="bulleted-list"><li>Bring AWS services to the edge of the 5G networks</li></ul><ul id="2144362c-6a30-47d4-8b58-24bda4b2a637" class="bulleted-list"><li>Example: EC2, EBS, VPC...</li></ul><ul id="420ccfd5-d895-4e9b-8cec-901765b04676" class="bulleted-list"><li>Ultra-Low latency </li></ul></li></ul></div></article></body></html>
